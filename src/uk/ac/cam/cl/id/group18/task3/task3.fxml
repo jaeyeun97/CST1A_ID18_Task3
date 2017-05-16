@@ -21,32 +21,6 @@
       <RowConstraints />
    </rowConstraints>
    <children>
-      <Pane prefHeight="800.0" prefWidth="960.0">
-         <children>
-            <Slider layoutX="41.0" layoutY="742.0" prefHeight="15.0" prefWidth="885.0" />
-            <TextField layoutX="253.0" layoutY="46.0" prefHeight="26.0" prefWidth="450.0" />
-            <ListView layoutX="56.0" layoutY="25.0" prefHeight="124.0" prefWidth="116.0" />
-            <Button layoutX="721.0" layoutY="46.0" mnemonicParsing="false" text="Button" />
-            <ListView layoutX="253.0" layoutY="100.0" prefHeight="323.0" prefWidth="450.0" />
-         </children></Pane>
-      <Accordion GridPane.columnIndex="1">
-        <panes>
-          <TitledPane animated="false" text="">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-          <TitledPane animated="false" text="">
-            <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-            </content>
-          </TitledPane>
-        </panes>
-      </Accordion>
+
    </children>
 </GridPane>
