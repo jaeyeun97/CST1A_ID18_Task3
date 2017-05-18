@@ -7,11 +7,24 @@ import java.io.*;
 import com.google.gson.*;
 
 //Initialising the object fetches the data.
-//the method locationNames returns an array of strings.
+//
+//Methods:
+//  
+//  locationNames():
+//    returns a String[] containing names of the locations
+//    made available by the api
+//
+//  search(String name):
+//    returns the id of a site with that name (undefined
+//    behaviour with multiple sites with same name)
 
 public class Locations {
 
 	public Location[] locations;
+
+	private int pointer;
+
+	private HashMap<String, String> map;
 
 	public Locations() throws MalformedURLException, IOException{
 		URL data = DataTools.request("val/wxfcs/all/json/sitelist");
@@ -30,6 +43,26 @@ public class Locations {
 		String locationString = buildString.substring(buildString.indexOf("["), buildString.indexOf("]") + 1);
 
 		locations = parseString(locationString);
+
+		map = new HashMap<String, String>();
+		pointer = 0;
+	}
+
+	public String search(String name){
+		if(map.containsKey(name)){
+			return map.get(name);
+		}
+		while(pointer < locations.length){
+			if(locations[pointer].getName() == name){
+				map.put(locations[pointer].getName(), locations[pointer].getID());
+				pointer++;
+				return locations[pointer - 1].getID();
+			} else {
+				map.put(locations[pointer].getName(), locations[pointer].getID());
+				pointer++;
+			}
+		}
+		throw new NullPointerException();
 	}
 
 	private Location[]  parseString(String locationString){
