@@ -17,32 +17,31 @@ import javafx.scene.layout.VBox;
 public class AccordionController {
     @FXML
     private Accordion accordion;
+    private Image sunnyCloud = new Image("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009_960_720.png", 0, 24, true, true);
     
-    private TitledPane Accord(){
+    private TitledPane Accord(Image weather){
 		TitledPane oneTab = new TitledPane();
 		Label day = new Label("Monday");
-		Image weather = new Image( "https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009_960_720.png", 0, 24, true, true);
 		
-		VBox vPane = new VBox();
-		vPane.setStyle("-fx-padding: 10");
-		vPane.setSpacing(10);
-		vPane.getChildren().add(new Label("weatherInfo 1"));
+		VBox row = new VBox();
+		row.setStyle("-fx-padding: 10");
+		row.setSpacing(10);
+		row.getChildren().add(new Label("weatherInfo 1"));
 	
-		Label someLabel = new Label();
-	    someLabel.textProperty().bind(Bindings.size(vPane.getChildren()).asString());
-	
-	    HBox header = new HBox();
-	    header.setSpacing(3);
-	    header.setAlignment(Pos.CENTER);
-	    header.setStyle("header");
-	    header.getChildren().add(someLabel);
-	    header.getChildren().add(new ImageView(weather));
-	    header.getChildren().add(day);
-		oneTab.setGraphic(header);
+	    HBox col = new HBox();
+	    col.setSpacing(3);
+	    col.setAlignment(Pos.CENTER);
+	    col.getChildren().add(new ImageView(weather));
+	    col.getChildren().add(day);
+	    
+	    row.getChildren().add(col);
+	    
+		//oneTab.setGraphic(header);
+	    oneTab.setGraphic(row);
 		return oneTab;
     }
     @FXML
     private void initialize(){
-        accordion.getPanes().add(Accord());
+        accordion.getPanes().add(Accord(sunnyCloud));
     }
 }
