@@ -4,34 +4,40 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.util.*;
 import java.io.*;
+import com.google.gson.*;
+
+//Initialising the object fetches the data.
+//the method locationNames returns an array of strings.
 
 public class Locations {
+
+	public Location[] locations;
+
 	public Locations() throws MalformedURLException, IOException{
 		URL data = DataTools.request("val/wxfcs/all/json/sitelist");
 		InputStream is = data.openStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 		
-		String locationString = "";
+		String buildString = "";
 
 		String line;
 		while((line = br.readLine()) != null)
-			locationString += line;
+			buildString += line;
 
 		br.close();
 		is.close();
+		
+		String locationString = buildString.substring(buildString.indexOf("["), buildString.indexOf("]") + 1);
 
-		System.out.println(locationString);
+		locations = parseString(locationString);
 	}
 
-	private Location[] parseString(String locationString){
-		return null;
+	private Location[]  parseString(String locationString){
+		Location[] locationArray = new Gson().fromJson(locationString, Location[].class);
+		return locationArray;
 	}
 
-	public static void main(String[] args) throws IOException{
-		try{
-			Locations l = new Locations();
-		} catch (MalformedURLException e){
-			System.out.println("URL Malformed (uh-oh)");
-		}
+	public String[] locationNames(){
+		return Arrays.copyOf(locations, locations.length, String[].class);
 	}
 }

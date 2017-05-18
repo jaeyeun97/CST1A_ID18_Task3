@@ -1,15 +1,25 @@
 package uk.ac.cam.cl.id.group18.task3;
 
 import java.util.*;
+import com.google.gson.Gson;
 
 public class Location{
-	private String name;
+	private String elevation;
 	private String id;
-	private String[] data;
-	public Location(String jsonid, String jsonname, String[] jsondata){
-		name = jsonname;
-		id = jsonid;
-		data = jsondata;
+	private String latitude;
+	private String longitude;
+	private String name;
+	private String region;
+	private String unitaryAuthArea;
+
+	public Location(String jElevation, String jId, String jLatitude, String jLongitude, String jName, String jRegion, String jUnitaryAuthArea){
+		elevation = jElevation;
+		id = jId;
+		latitude = jLatitude;
+		longitude = jLongitude;
+		name = jName;
+		region = jRegion;
+		unitaryAuthArea = jUnitaryAuthArea;
 	}
 
 	public String getID(){
@@ -20,7 +30,7 @@ public class Location{
 		return name;
 	}
 
-	public String[] getData(){
-		return data;
+	public String toString(){
+		return name;
 	}
 }
