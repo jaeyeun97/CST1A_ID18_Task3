@@ -1,6 +1,7 @@
 .idea/
 .idea/*
 *.iml
+*.class
 out/
 bin/
 out/*
