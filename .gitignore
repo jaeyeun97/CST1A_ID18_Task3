@@ -3,4 +3,5 @@
 *.iml
 *.class
 out/
+bin/
 out/*
