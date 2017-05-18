@@ -33,7 +33,7 @@ public class AccordionController {
 	    subBox.setSpacing(10);
 	    subBox.setAlignment(Pos.CENTER);
 	    subBox.getChildren().add(new ImageView(weather));
-	    subBox.getChildren().add(new Label("33¡ÆC"));
+	    subBox.getChildren().add(new Label("33ÂºC"));
 	    subBox.getChildren().add(new ImageView(weather));
 	    subBox.getChildren().add(new Label("100mph"));
 	    subBox.getChildren().add(new ImageView(weather));
