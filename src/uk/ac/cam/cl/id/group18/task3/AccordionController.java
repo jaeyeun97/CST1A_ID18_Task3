@@ -29,7 +29,7 @@ public class AccordionController {
 		row.getChildren().add(new Label("weatherInfo 1"));
 	
 	    HBox col = new HBox();
-	    col.setSpacing(3);
+	    col.setSpacing(3);	
 	    col.setAlignment(Pos.CENTER);
 	    col.getChildren().add(new ImageView(weather));
 	    col.getChildren().add(day);

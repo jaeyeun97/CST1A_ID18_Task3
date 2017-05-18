@@ -24,7 +24,7 @@ public class Locations {
 	}
 
 	private Location[] parseString(String locationString){
-		
+		return null;
 	}
 
 	public static void main(String[] args) throws IOException{
