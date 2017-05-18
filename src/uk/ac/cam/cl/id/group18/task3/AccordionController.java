@@ -13,6 +13,6 @@ public class AccordionController {
 
     @FXML
     private void initialize(){
-        accordion.getPanes().get(0).setGraphic(new Label("Google"));
+        // accordion.getPanes().get(0).setGraphic(new Label("Google"));
     }
 }

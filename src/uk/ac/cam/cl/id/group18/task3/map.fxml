@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="800.0" prefWidth="960.0" fx:controller="uk.ac.cam.cl.id.group18.task3.MapController">
+<Pane prefHeight="800.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.MapController">
     <children>
         <Slider layoutX="41.0" layoutY="742.0" prefHeight="15.0" prefWidth="885.0" />
-        <TextField layoutX="253.0" layoutY="46.0" prefHeight="26.0" prefWidth="450.0" />
-        <ListView layoutX="56.0" layoutY="25.0" prefHeight="124.0" prefWidth="116.0" />
-        <Button layoutX="721.0" layoutY="46.0" mnemonicParsing="false" text="Button" />
-        <ListView layoutX="253.0" layoutY="100.0" prefHeight="323.0" prefWidth="450.0" />
+        <TextField fx:id="searchBar" layoutX="253.0" layoutY="46.0" prefHeight="26.0" prefWidth="450.0" promptText="Search" />
+        <ListView fx:id="tickBox" layoutX="56.0" layoutY="25.0" prefHeight="124.0" prefWidth="116.0" />
+        <Button fx:id="returnCurrent" layoutX="721.0" layoutY="46.0" mnemonicParsing="false" text="Button" />
+        <ListView fx:id="searchResult" layoutX="253.0" layoutY="100.0" prefHeight="323.0" prefWidth="450.0" />
     </children>
-</AnchorPane>
+</Pane>
