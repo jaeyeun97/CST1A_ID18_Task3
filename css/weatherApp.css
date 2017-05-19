@@ -1,0 +1,9 @@
+.background {
+    -fx-background-image: url("../images/background.jpg");
+}
+
+#accord {
+	-fx-background-color: rgba(29,52,97, 0.4);
+	-fx-box-border: transparent;
+	-fx-fill: transparent;
+}
