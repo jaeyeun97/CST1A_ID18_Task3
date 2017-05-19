@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -28,6 +29,7 @@ public class Main extends Application {
         ((GridPane) root).add(accordion, 1, 0);
         
         Scene scene = new Scene(root, 1280, 800);
+        scene.getStylesheets().add("file:css/weatherApp.css");
         
         primaryStage.setTitle("Group 18 Weather App");
         primaryStage.setScene(scene);
