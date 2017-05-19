@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<GridPane alignment="center" hgap="10" maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" styleClass="background" stylesheets="@weatherApp.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.Controller">
+<GridPane alignment="center" hgap="10" maxHeight="800.0" maxWidth="1280.0" minHeight="800.0" minWidth="1280.0" prefHeight="800.0" prefWidth="1280.0" styleClass="background" stylesheets="@../../../../../../../../css/weatherApp.css" vgap="10" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.Controller">
    <columnConstraints>
       <ColumnConstraints prefWidth="960.0" />
       <ColumnConstraints prefWidth="320.0" />

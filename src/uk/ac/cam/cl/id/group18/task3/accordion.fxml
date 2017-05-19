@@ -5,7 +5,7 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.AccordionController">
    <children>
-      <Accordion fx:id="accordion" maxHeight="800.0" maxWidth="320.0" minHeight="800" minWidth="320.0" prefHeight="800.0" prefWidth="320.0">
+      <Accordion fx:id="accordion" maxHeight="800.0" maxWidth="320.0" minHeight="320" minWidth="320.0" prefHeight="800.0" prefWidth="320.0">
       </Accordion>
    </children>
 </AnchorPane>
