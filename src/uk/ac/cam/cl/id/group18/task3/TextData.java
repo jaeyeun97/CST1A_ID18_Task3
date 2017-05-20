@@ -6,6 +6,22 @@ import java.util.*;
 import java.util.regex.*;
 import com.google.gson.Gson;
 
+//TextData
+//
+//This class allows you to obtain text data about a location.
+//
+//The constructor takes one argument: the id string
+//This can be found by searching for the location by name using Locations.search();
+//
+//Once constructed, a public variable TextData.data is available.
+//TextData.data is a two dimensional array of ThreeHourWeather
+//
+//TextData.data[day][i] is the i'th available ThreeHourWeather data in the day'th
+//day from now (day 0 is today)
+//
+//See the ThreeHourWeather class for what information is available from a 
+//ThreeHourWeather.
+
 
 public class TextData{
 
@@ -21,6 +37,7 @@ public class TextData{
 		String buildString = "";
 
 		String line;
+		System.out.println("["+m.group(1)+"]");
 		while((line = br.readLine()) != null)
 			buildString += line;
 
