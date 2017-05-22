@@ -6,17 +6,25 @@ import java.net.URL;
 import java.net.MalformedURLException;
 import java.io.*;
 import java.util.*;
+import com.google.gson.*;
 
 public class ImageRequest{
-	public static Image getImage(String layer, String time, String timeStep) throws IOException{
+
+	public static String date = "";	
+
+	public static Image getImage(String layer, String time, int timeStep) throws IOException{
 		URL url = DataTools.request("layer/wxfcs/" + layer + "/png?RUN=" + time + "Z&FORECAST=" + timeStep + "&");
 
 		Image image = ImageIO.read(url);
 
 		return image;
 	}
+	
 
-	public static Map<Integer, Map<MapType, Image>> getLayers() throws IOException, MalformedURLException{
+	//timeStep should be the number of hours into the future for the forecast. If it doesn't go that far forward,
+	//A NullPointerException will be thrown. This is expected behaviour.
+	//On success, it returns a map from MapType to Image.
+	public static Map<MapType, Image> getLayers(int timeStep) throws IOException, MalformedURLException{
 		URL url = DataTools.request("layer/wxfcs/all/json/capabilities");
 		
 		InputStream is = url.openStream();
@@ -33,8 +41,51 @@ public class ImageRequest{
 
 		String data = cleanup(buildString);
 		System.out.println(data);
+		
+		JsonArray jArray = new Gson().fromJson(data, JsonArray.class);
+		
+		HashMap<MapType, Image> layers = new HashMap<>();
 
-		return null;
+		for(int i = 0; i < jArray.size(); i++){
+			JsonObject jObj = jArray.get(i).getAsJsonObject();
+			
+			String layer = jObj.getAsJsonPrimitive("LayerName").getAsString();
+			
+			JsonObject timeSteps = jObj.getAsJsonObject("Timesteps");
+			String time = timeSteps.getAsJsonPrimitive("defaultTime").getAsString();
+			date = time;
+
+			Integer[] timeStepsArray = new Gson().fromJson(timeSteps.get("Timestep"), Integer[].class);
+
+			timeStep = timeStepsArray[timeStep/timeStepsArray[1]]; //Forces timestep onto a suitable value, scaled by the first non-zero val
+			
+			MapType map;
+			
+			Image im = getImage(layer, time, timeStep);
+			
+			switch(layer) {
+				case "Precipitation_Rate": map = MapType.RAINFALL;
+							   layers.put(map, im);
+							   break;
+				case "Total_Cloud_Cover": map = MapType.CLOUD;
+							  layers.put(map, im);
+							  break;
+				case "Total_Cloud_Cover_Precip_Rate_Overlaid": map = MapType.CLOUDANDRAIN;
+									       layers.put(map, im);
+									       break;
+				case "Temperature": map = MapType.TEMP;
+						    layers.put(map, im);
+						    break;
+
+				case "Atlantic": map = MapType.PRESSURE;
+						 layers.put(map, im);
+						 break;
+			}
+			
+
+		}
+
+		return layers;
 	}
 
 	private static String cleanup(String inputData){
@@ -44,10 +95,7 @@ public class ImageRequest{
 		int end = partCleanedData.lastIndexOf(']');
 
 		String cleanedData = partCleanedData.substring(start, end + 1);
-		return cleanedData;
-	}
 
-	public static void main(String[] args) throws MalformedURLException, IOException{
-		ImageRequest.getLayers();
+		return cleanedData;
 	}
 }
