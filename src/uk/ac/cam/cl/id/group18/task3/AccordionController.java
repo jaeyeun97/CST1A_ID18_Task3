@@ -103,26 +103,27 @@ public class AccordionController {
 
     	TitledPane day1 = accord(Mon, sunnyCloud);
     	GridPane temp = new GridPane();
-    	temp.add(hourly(), 0, 1);
+    	temp.add(hourly(), 0, 0);
+    	temp.add(accord_content(), 0, 1);
     	day1.setContent(temp);
     	
     	TitledPane day2 = accord(Tue, sunnyCloud);
-    	day2.setContent(new Label("test pane, would be replaced with anchorpane"));
+    	day2.setContent(accord_content());
     	
     	TitledPane day3 = accord(Wed, sunnyCloud);
-    	day3.setContent(new Label("test pane, would be replaced with anchorpane"));
+    	day3.setContent(accord_content());
 
     	TitledPane day4 = accord(Thu, sunnyCloud);
-    	day4.setContent(new Label("test pane, would be replaced with anchorpane"));
+    	day4.setContent(accord_content());
 
     	TitledPane day5 = accord(Fri, sunnyCloud);
-    	day5.setContent(new Label("test pane, would be replaced with anchorpane"));
+    	day5.setContent(accord_content());
 
     	TitledPane day6 = accord(Sat, sunnyCloud);
-    	day6.setContent(new Label("test pane, would be replaced with anchorpane"));
+    	day6.setContent(accord_content());
 
     	TitledPane day7 = accord(Sun, sunnyCloud);
-    	day7.setContent(new Label("test pane, would be replaced with anchorpane"));
+    	day7.setContent(accord_content());
 
 
         accordion.getPanes().add(day1);
@@ -132,41 +133,59 @@ public class AccordionController {
         accordion.getPanes().add(day5);
         accordion.getPanes().add(day6);
         accordion.getPanes().add(day7);
-        accordion.setExpandedPane(day1);
     }
 
 
     @FXML
 	private GridPane accord_content (){
     	GridPane content = new GridPane();
-
+		content.getStyleClass().add("content_tab");
 
 
         Label wind_val = new Label("7-9");
-        wind_val.setFont(new Font(56));
+        wind_val.getStyleClass().add("wind_val");
     	content.add(wind_val,0,0);
-    	content.add(new Label("mph"), 1, 0);
-    	content.add(new Label("NE"), 2, 0);
-        content.setVgap(20);
+    	Label wind_msmt = new Label("mph");
+		wind_msmt.getStyleClass().add("wind_msmt");
+    	content.add(wind_msmt, 1, 0);
+    	Label wind_dir = new Label("NE");
+		wind_dir.getStyleClass().add("wind_dir");
+    	content.add(wind_dir, 2, 0);
 
-    	content.add(new Label("11"), 0, 1);
-    	content.add(new Label("ºC"), 1, 1);
-        content.setVgap(20);
+        Label temp_val = new Label("11");
+		temp_val.getStyleClass().add("temp_val");
+    	content.add(temp_val, 0, 1);
+    	Label temp_msmt = new Label("ºC");
+		temp_msmt.getStyleClass().add("temp_msmt");
+    	content.add(temp_msmt, 1, 1);
 
-    	content.add(new Label("Precipitation:"), 0, 2);
-    	content.add(new Label("0%"), 1, 2);
-        content.setVgap(10);
+        Label prec_name = new Label("Precipitation:");
+		prec_name.getStyleClass().add("small_name");
+    	content.add(prec_name, 0, 2);
+    	Label prec_val = new Label("0%");
+		prec_val.getStyleClass().add("small_val");
+    	content.add(prec_val, 1, 2);
 
-    	content.add(new Label("Humidity:"), 0,3);
-		content.add(new Label("0%"), 1, 3);
-        content.setVgap(10);
+        Label hum_name = new Label("Humidity:");
+        hum_name.getStyleClass().add("small_name");
+    	content.add(hum_name, 0,3);
+    	Label hum_val = new Label("0%");
+    	hum_val.getStyleClass().add("small_val");
+		content.add(hum_val, 1, 3);
 
-    	content.add(new Label("UV:"), 0, 4);
-    	content.add(new Label("6"), 1, 4);
-        content.setVgap(10);
+        Label uv_name = new Label("UV:");
+        uv_name.getStyleClass().add("small_name");
+    	content.add(uv_name, 0, 4);
+    	Label uv_val = new Label("6");
+    	uv_val.getStyleClass().add("small_val");
+    	content.add(uv_val, 1, 4);
 
-    	content.add(new Label("Pressure:"), 0, 5);
-    	content.add(new Label("1022 hPa"), 1, 5);
+		Label pres_name = new Label("Pressure:");
+		pres_name.getStyleClass().add("small_name");
+    	content.add(pres_name, 0, 5);
+    	Label pres_val = new Label("1022 hPa");
+    	pres_val.getStyleClass().add("small_val");
+    	content.add(pres_val, 1, 5);
 
     	return content;
 	}
