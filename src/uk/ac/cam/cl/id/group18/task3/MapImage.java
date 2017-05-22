@@ -17,36 +17,18 @@ public class MapImage {
     // private static Map<Location,Map<Date, MapImage>> maps = new HashMap<>();
     private Date date;
 
-    private Image cloudOverlayImage;
-    private Image rainFallOverlayImage;
-    private Image cloudAndRainOverlayImage;
-    private Image temperatureOverlayImage;
-    private Image pressureOverlayImage;
+    private Map<MapType, Image> overlayImages = new HashMap<>();
 
     public MapImage(Date date){
         this.date = date;
     }
 
     public Image getOverlayImage(MapType type){
-        Image i = null;
-        switch(type){
-            case RAINFALL:
-                i = rainFallOverlayImage;
-                break;
-            case CLOUD:
-                i = cloudOverlayImage;
-                break;
-            case CLOUDANDRAIN:
-                i = cloudAndRainOverlayImage;
-                break;
-            case TEMP:
-                i = temperatureOverlayImage;
-                break;
-            case PRESSURE:
-                i = pressureOverlayImage;
-                break;
+        if(overlayImages.containsKey(type)){
+            return overlayImages.get(type);
+        } else {
+            return null;
         }
-        return i;
     }
 
     public ImageView getOverlayImageView(int zoom, MapType type){
