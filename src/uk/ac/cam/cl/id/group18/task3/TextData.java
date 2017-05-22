@@ -37,7 +37,6 @@ public class TextData{
 		String buildString = "";
 
 		String line;
-		System.out.println("["+m.group(1)+"]");
 		while((line = br.readLine()) != null)
 			buildString += line;
 
