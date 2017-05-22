@@ -56,7 +56,7 @@ public class AccordionController {
 	    subBox.setSpacing(10);
 	    subBox.setAlignment(Pos.CENTER);
 	    subBox.getChildren().add(new ImageView(weather));
-	    subBox.getChildren().add(new Label("33ÂºC"));
+	    subBox.getChildren().add(new Label("33¨¬C"));
 	    subBox.getChildren().add(new ImageView(weather));
 	    subBox.getChildren().add(new Label("100mph"));
 	    subBox.getChildren().add(new ImageView(weather));
@@ -81,7 +81,7 @@ public class AccordionController {
 
     		List<Node> contents = hour.getChildren();
     		contents.add(new Label("00:00"));
-    		contents.add(new Label("10 ÂºC"));
+    		contents.add(new Label("10 ¨¬C"));
     		contents.add(new Label("999 mph"));
     		hours.add(hour);
     	}
@@ -155,7 +155,7 @@ public class AccordionController {
         Label temp_val = new Label("11");
 		temp_val.getStyleClass().add("temp_val");
     	content.add(temp_val, 0, 1);
-    	Label temp_msmt = new Label("ÂºC");
+    	Label temp_msmt = new Label("¨¬C");
 		temp_msmt.getStyleClass().add("temp_msmt");
     	content.add(temp_msmt, 1, 1);
 

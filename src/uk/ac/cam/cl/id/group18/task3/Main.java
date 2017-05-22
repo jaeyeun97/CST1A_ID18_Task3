@@ -30,6 +30,7 @@ public class Main extends Application {
         
         Scene scene = new Scene(root, 1280, 800);
         scene.getStylesheets().add("file:css/weatherApp.css");
+        scene.getStylesheets().add("file:css/searchBar.css");
         
         primaryStage.setTitle("Group 18 Weather App");
         primaryStage.setScene(scene);
