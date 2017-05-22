@@ -2,6 +2,8 @@ package uk.ac.cam.cl.id.group18.task3;
 
 import java.util.*;
 import com.google.gson.Gson;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Location{
 	private String elevation;
@@ -29,6 +31,8 @@ public class Location{
 	public String getName(){
 		return name;
 	}
+
+	public StringProperty getStringProperty() { return new SimpleStringProperty(name); }
 
 	public String toString(){
 		return name;
