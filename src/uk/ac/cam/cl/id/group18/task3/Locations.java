@@ -72,7 +72,13 @@ public class Locations {
 	}
 
 	public String[] locationNames(){
-		return Arrays.copyOf(locations, locations.length, String[].class);
+		//I changed it a bit for now cause the original code gave me java.lang.ArrayStoreException
+		String[] s = new String[locations.length];
+		for(int i=0; i<locations.length; i++){
+			s[i] = locations[i].toString();
+		}
+		return s;
+		//return Arrays.copyOf(locations, locations.length, String[].class);
 	}
 }
 
