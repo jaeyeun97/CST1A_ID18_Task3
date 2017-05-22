@@ -6,9 +6,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.CheckBoxListCell;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.util.StringConverter;
+
+import java.io.IOException;
 
 /**
  * Created by jaeyeun on 17. 5. 16.
@@ -28,7 +31,7 @@ public class MapController {
     private StackPane mapImagePane;
 
     @FXML
-    private void initialize(){
+    private void initialize() throws IOException {
         searchResult.setVisible(false);
         // Tick Box
         tickBox.setItems(MapSelector.getObservableList());
@@ -45,5 +48,8 @@ public class MapController {
             }
         }));
 
+        OpenStreetMap m = new OpenStreetMap(54.5, -3.5, 6);
+        ImageView i = m.getImageView();
+        mapImagePane.getChildren().add(i);
     }
 }
