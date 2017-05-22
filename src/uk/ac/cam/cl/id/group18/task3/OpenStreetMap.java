@@ -5,7 +5,6 @@ import javafx.scene.image.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
@@ -14,15 +13,22 @@ import java.net.URLConnection;
  */
 public class OpenStreetMap {
     private static final String baseURL = "http://staticmap.openstreetmap.de/staticmap.php";
+    private double lat;
+    private double lon;
+    private int zoom;
     private Image i;
 
     public OpenStreetMap(double lat, double lon, int zoom) throws IOException {
-        URLConnection conn = new URL(getFullURL(lat, lon, zoom)).openConnection();
+        this.lat = lat;
+        this.lon = lon;
+        this.zoom = zoom;
+
+        URLConnection conn = new URL(getFullURL()).openConnection();
         InputStream stream = conn.getInputStream();
         i = new Image(stream);
     }
 
-    private String getFullURL(double lat, double lon, int zoom){
+    private String getFullURL(){
         return baseURL + String.format("?center=%.7f,%.7f&zoom=%d&size=960x800&maptype=mapnik", lat, lon, zoom);
     }
 

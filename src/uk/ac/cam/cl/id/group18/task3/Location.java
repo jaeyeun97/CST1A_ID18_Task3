@@ -8,8 +8,8 @@ import javafx.beans.property.StringProperty;
 public class Location{
 	private String elevation;
 	private String id;
-	private String latitude;
-	private String longitude;
+	private double latitude;
+	private double longitude;
 	private String name;
 	private String region;
 	private String unitaryAuthArea;
@@ -17,8 +17,8 @@ public class Location{
 	public Location(String jElevation, String jId, String jLatitude, String jLongitude, String jName, String jRegion, String jUnitaryAuthArea){
 		elevation = jElevation;
 		id = jId;
-		latitude = jLatitude;
-		longitude = jLongitude;
+		latitude = Double.parseDouble(jLatitude);
+        longitude = Double.parseDouble(jLongitude);
 		name = jName;
 		region = jRegion;
 		unitaryAuthArea = jUnitaryAuthArea;
@@ -37,4 +37,8 @@ public class Location{
 	public String toString(){
 		return name;
 	}
+
+	public double getLatitude() { return this.latitude; }
+
+    public double getLongitude() { return this.longitude; }
 }

@@ -1,10 +1,7 @@
 package uk.ac.cam.cl.id.group18.task3;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
@@ -21,6 +18,8 @@ public class MapController {
     private Pane mainPane;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Slider mapSlider;
     @FXML
     private ListView searchResult;
     @FXML
@@ -51,5 +50,24 @@ public class MapController {
         OpenStreetMap m = new OpenStreetMap(54.5, -3.5, 6);
         ImageView i = m.getImageView();
         mapImagePane.getChildren().add(i);
+
+        mapSlider.valueProperty().addListener(
+                (observable, oldVal, newVal) -> mapSlider.setValue(((int) Math.round(newVal.doubleValue()/3))*3)
+        );
+        mapSlider.setLabelFormatter(new StringConverter<Double>() {
+            @Override
+            public String toString(Double d) {
+                return d.intValue() + "hours";
+            }
+
+            @Override
+            public Double fromString(String string) {
+                return null;
+            }
+        });
+        mapSlider.valueProperty().addListener((observable, oldVal, newVal) -> {
+            // observable.getValue().intValue();
+            // use the value above to change image.
+        });
     }
 }
