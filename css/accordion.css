@@ -63,11 +63,10 @@
 
 
 
-.content_tab{
- -fx-background-image: url("../images/background_sun.png");
-}
 
-.content_tab .text{
+
+
+.hour .text{
  -fx-fill: rgb(253,181,21);
  -fx-stroke: darkblue;
  -fx-stroke-width: 0.5px;
