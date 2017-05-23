@@ -54,11 +54,21 @@ public class AccordionController {
 				wind += w.windSpeed();
 				prec += w.precipProb();
 			}
-			temp = ((double) Math.round(temp * 10 / todayData.length)) / 10;
-			wind = ((double) Math.round(wind * 10 / todayData.length)) / 10;
-			prec = ((double) Math.round(prec * 10 / todayData.length)) / 10;
-		}
-    	
+			temp = ((double) Math.round(temp * 10/todayData.length)) / 10;
+			wind = ((double) Math.round(wind * 10/todayData.length)) / 10;
+			prec = ((double) Math.round(prec * 10/todayData.length)) / 10;
+			
+			if(tempAvr.size() > i){
+				tempAvr.get(i).setValue(temp + "°C");
+				windAvr.get(i).setValue(wind + "mph");
+				precAvr.get(i).setValue(prec + "%");
+			}
+			
+			//update ScrollPane
+			windSpeedScroll.get(i).setValue(Integer.toString(todayData[i].windSpeed()));
+			windDirectionScroll.get(i).setValue(todayData[i].direction());
+			tempScroll.get(i).setValue(Integer.toString(todayData[i].temperature()));
+    	}    	
     }
 
     private TitledPane accord(Label day, int dd, int mm, int whichday){
