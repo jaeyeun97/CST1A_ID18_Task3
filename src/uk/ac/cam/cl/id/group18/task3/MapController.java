@@ -50,7 +50,7 @@ public class MapController {
         ObservableList data = FXCollections.observableArrayList();
         Locations loc = null;
         try {
-			loc = new Locations();
+            loc = Locations.getInstance();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -129,8 +129,6 @@ public class MapController {
             }
         });
         mapSlider.valueProperty().addListener((observable, oldVal, newVal) -> {
-            // observable.getValue().intValue();
-            // use the value above to change image.
         });
     }
 }

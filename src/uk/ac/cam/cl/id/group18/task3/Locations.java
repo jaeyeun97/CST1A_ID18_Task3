@@ -22,12 +22,19 @@ import com.google.gson.*;
 public class Locations {
 
 	public Location[] locations;
-
+	private Map<Integer, Location> locationMap = new HashMap<>();
 	private int pointer;
+	private HashMap<String, Integer> map;
+	private static Locations instance = null;
 
-	private HashMap<String, String> map;
+	public static Locations getInstance() throws IOException {
+		if(instance == null){
+			instance = new Locations();
+		}
+		return instance;
+	}
 
-	public Locations() throws MalformedURLException, IOException{
+	private Locations() throws IOException{
 		URL data = DataTools.request("val/wxfcs/all/json/sitelist");
 		InputStream is = data.openStream();
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -45,11 +52,19 @@ public class Locations {
 
 		locations = parseString(locationString);
 
-		map = new HashMap<String, String>();
+		for(int i = 0; i < locations.length; i++){
+		    locationMap.put(locations[i].getID(), locations[i]);
+        }
+
+		map = new HashMap<>();
 		pointer = 0;
 	}
 
-	public String search(String name){
+	public Location getLocation(int id){
+	    return locationMap.get(id);
+    }
+
+	public int search(String name){
 		if(map.containsKey(name)){
 			return map.get(name);
 		}
@@ -66,7 +81,7 @@ public class Locations {
 		throw new NullPointerException();
 	}
 
-	private Location[]  parseString(String locationString){
+	private Location[] parseString(String locationString){
 		Location[] locationArray = new Gson().fromJson(locationString, Location[].class);
 		return locationArray;
 	}
