@@ -53,7 +53,7 @@ public class MapController {
 		if(loc == null){
 			System.out.println("location load failed for autoFillSearchBar");
 		}
-        for(int j=0; j<s.length; j++){ 
+        for(int j=0; j<loc.locations.length; j++){
             data.add(loc.locations[j]);
         } 
         
