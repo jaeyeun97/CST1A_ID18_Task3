@@ -31,7 +31,6 @@ public class ImageRequest {
             is.close();
 
             String data = cleanup(buildString);
-            System.out.println(data);
 
             jArray = new Gson().fromJson(data, JsonArray.class);
         } catch (IOException e) {
