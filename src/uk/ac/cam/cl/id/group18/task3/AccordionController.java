@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import uk.ac.cam.cl.id.group18.task3.Locations;
 
 /**
- * Created by jaeyeun on 17. 5. 16.
+ * Written by Seohyun Woo, Theodora Zamfirache.
  */
 public class AccordionController {
     @FXML
