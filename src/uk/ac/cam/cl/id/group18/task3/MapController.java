@@ -50,7 +50,7 @@ public class MapController {
     @FXML
     private Slider zoomSlider;
 
-    private Button returnCurrent;
+    // private Button returnCurrent;
 
     private ComboBox<Location> box;
     
@@ -86,6 +86,7 @@ public class MapController {
         
         //Button
         //returnCurrent = new Button("Search");
+        /*
         Image buttonimg = new Image("file:images/search3.png");
         ImageView buttonimgv = new ImageView(buttonimg);
         returnCurrent = new Button("", new ImageView(buttonimg));
@@ -96,10 +97,11 @@ public class MapController {
                 //System.out.println(box.getText());  -> for autofillbox, might need to use a map to return Location object
             }
         });
+        */
 
         
         //put them into HBox
-        searchBar.getChildren().addAll(/*new ImageView(search),*/ box, returnCurrent);
+        searchBar.getChildren().add(box);
         searchBar.setMaxHeight(5);
     }
         
