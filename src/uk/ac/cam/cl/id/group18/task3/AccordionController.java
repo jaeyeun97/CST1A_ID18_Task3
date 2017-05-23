@@ -37,22 +37,37 @@ public class AccordionController {
     
     public void update(Location loc){
     	getData(loc.getName());
+    	
     	for(int i=0; i<data.length; i++){
-    		
+        	//update accord
+			ThreeHourWeather[] todayData = data[i];
+			Double temp = 0.0;
+			Double wind = 0.0;
+			Double prec = 0.0;
+			for(ThreeHourWeather w : todayData){
+				temp += w.temperature();
+				wind += w.windSpeed();
+				prec += w.precipProb();
+			}
+			temp = ((double) Math.round(temp * 10/todayData.length)) / 10;
+			wind = ((double) Math.round(wind * 10/todayData.length)) / 10;
+			prec = ((double) Math.round(prec * 10/todayData.length)) / 10;
+			
+			if(tempAvr.size() > i){
+				tempAvr.get(i).setValue(temp + "°C");
+				windAvr.get(i).setValue(wind + "mph");
+				precAvr.get(i).setValue(prec + "%");
+			}
+			
+			//update ScrollPane
+			windSpeedScroll.get(i).setValue(Integer.toString(todayData[i].windSpeed()));
+			windDirectionScroll.get(i).setValue(todayData[i].direction());
+			tempScroll.get(i).setValue(Integer.toString(todayData[i].temperature()));
     	}
-    	//calculating average weather
-    			ThreeHourWeather[] todayData = data[whichday];
-    			Double temp = 0.0;
-    			Double wind = 0.0;
-    			Double prec = 0.0;
-    			for(ThreeHourWeather w : todayData){
-    				temp += w.temperature();
-    				wind += w.windSpeed();
-    				prec += w.precipProb();
-    			}
-    			temp = ((double) Math.round(temp * 10/todayData.length)) / 10;
-    			wind = ((double) Math.round(wind * 10/todayData.length)) / 10;
-    			prec = ((double) Math.round(prec * 10/todayData.length)) / 10;
+    	
+    	//update ScrollPane
+    	
+
     	
     	
     }
