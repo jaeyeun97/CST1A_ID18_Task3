@@ -7,7 +7,7 @@ import javafx.beans.property.StringProperty;
 
 public class Location{
 	private String elevation;
-	private String id;
+	private int id;
 	private double latitude;
 	private double longitude;
 	private String name;
@@ -16,7 +16,7 @@ public class Location{
 
 	public Location(String jElevation, String jId, String jLatitude, String jLongitude, String jName, String jRegion, String jUnitaryAuthArea){
 		elevation = jElevation;
-		id = jId;
+		id = Integer.parseInt(jId);
 		latitude = Double.parseDouble(jLatitude);
         longitude = Double.parseDouble(jLongitude);
 		name = jName;
@@ -24,7 +24,7 @@ public class Location{
 		unitaryAuthArea = jUnitaryAuthArea;
 	}
 
-	public String getID(){
+	public int getID(){
 		return id;
 	}
 	
