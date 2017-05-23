@@ -9,7 +9,8 @@ import java.net.URL;
 import java.net.URLConnection;
 
 /**
- * Created by jaeyeun on 17. 5. 22.
+ * Created by Charles Yoon on 17. 5. 22.
+ * Written by Charles Yoon.
  */
 public class OpenStreetMap {
     private static final String baseURL = "http://staticmap.openstreetmap.de/staticmap.php";

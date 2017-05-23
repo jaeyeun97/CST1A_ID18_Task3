@@ -19,7 +19,7 @@ import javafx.scene.layout.VBox;
 import uk.ac.cam.cl.id.group18.task3.Locations;
 
 /**
- * Created by jaeyeun on 17. 5. 16.
+ * Written by Seohyun Woo, Theodora Zamfirache.
  */
 public class AccordionController {
     @FXML
@@ -113,7 +113,7 @@ public class AccordionController {
 			
 			List<Node> content = hour.getChildren();
 			
-			content.add(new Label(i*3 + ":00"));
+			content.add(new Label(todayData[i].minutesAfterMidnight()/60 + ":00"));
 			
 			HBox wind = new HBox();
 			wind.getStyleClass().add("transparent");

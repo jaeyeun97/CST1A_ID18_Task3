@@ -4,9 +4,10 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 /**
- * Created by jaeyeun on 17. 5. 18.
+ * Created by Charles Yoon on 17. 5. 20.
+ * Written by Charles Yoon.
  */
 public enum MapType {
-    RAINFALL, CLOUD, CLOUDANDRAIN, TEMP, PRESSURE;
+    RAINFALL, CLOUD, TEMP, PRESSURE
 }
 

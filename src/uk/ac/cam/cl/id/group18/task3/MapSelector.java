@@ -12,7 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jaeyeun on 17. 5. 19.
+ * Created by Charles Yoon on 17. 5. 19.
+ * Written by Charles Yoon.
  */
 public class MapSelector {
     private static Map<MapType, MapSelector> instances = new HashMap<>();
@@ -32,7 +33,7 @@ public class MapSelector {
 
     public static Map<MapType, MapSelector> getInstances(){
         for(MapType type: MapType.values()){
-            if(type != MapType.CLOUDANDRAIN && !instances.containsKey(type)){
+            if(!instances.containsKey(type)){
                 instances.put(type, new MapSelector(getName(type)));
             }
         }
@@ -40,7 +41,7 @@ public class MapSelector {
     }
 
     public static MapSelector getInstance(MapType type){
-        if(type != MapType.CLOUDANDRAIN && !instances.containsKey(type)){
+        if(!instances.containsKey(type)){
             instances.put(type, new MapSelector(getName(type)));
         }
         return instances.get(type);

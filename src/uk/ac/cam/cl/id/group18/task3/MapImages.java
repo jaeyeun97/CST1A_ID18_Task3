@@ -1,5 +1,8 @@
 package uk.ac.cam.cl.id.group18.task3;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -8,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jaeyeun on 17. 5. 22.
+ * Created by Charles Yoon on 17. 5. 22.
+ * Written by Charles Yoon.
  */
 public class MapImages {
     private static Map<Integer, MapImage> images = new HashMap<>();
@@ -43,6 +47,11 @@ public class MapImages {
         } else {
             ImageView im = new ImageView(getOverlayImage(currentTimestep).getOverlayImage(type));
             imageViews.put(type, im);
+            if(type == MapType.TEMP){
+                im.setOpacity(0.2);
+            } else {
+                im.setOpacity(0.7);
+            }
             calculateImageView(type);
             return im;
         }
@@ -63,6 +72,7 @@ public class MapImages {
             AnchorPane pane = new AnchorPane();
             pane.setPrefHeight(800);
             pane.setPrefWidth(960);
+            pane.setVisible(false);
             imagePanes.put(type, pane);
             calculateImagePane(type);
             return pane;
@@ -121,6 +131,7 @@ public class MapImages {
 
     public static void updateLocation(Location location) throws IOException {
         currentLocation = location;
+        updateOpenStreetMapView();
         for(MapType type : MapType.values()){
             calculateImagePane(type);
         }
@@ -131,5 +142,14 @@ public class MapImages {
         for(MapType type: MapType.values()){
             getImageView(type).setImage(getOverlayImage(timestep).getOverlayImage(type));
         }
+    }
+
+    public static ObservableList<Node> getObservableList() throws IOException {
+        ObservableList<Node> list = FXCollections.observableArrayList();
+        list.add(getOpenStreetMapView());
+        for(MapType type : MapType.values()){
+            list.add(getImagePane(type));
+        }
+        return list;
     }
 }

@@ -5,7 +5,10 @@ import java.net.*;
 import java.util.*;
 import java.util.regex.*;
 import com.google.gson.Gson;
-
+/**
+ * Created by Leo Williams.
+ * Written by Leo Williams.
+ */
 //TextData
 //
 //This class allows you to obtain text data about a location.
