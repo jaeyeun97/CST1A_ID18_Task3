@@ -3,8 +3,9 @@ package uk.ac.cam.cl.id.group18.task3;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
+import java.util.Date;
+import java.util.Calendar;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -13,19 +14,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.BorderStroke;
-import javafx.scene.layout.BorderStrokeStyle;
-import javafx.scene.layout.BorderWidths;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.GridPane;
-import javafx.scene.text.Font;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 import uk.ac.cam.cl.id.group18.task3.Locations;
 
 /**
@@ -41,7 +31,7 @@ public class AccordionController {
     private Image precTitle = new Image("file:images/titlePrec.png", 0, 25, true, true);
 
     		
-    private TitledPane accord(Label day, int whichday){
+    private TitledPane accord(Label day, int dd, int mm, int whichday){
 		TitledPane oneTab = new TitledPane();
 		oneTab.getStylesheets().add("file:css/accordion.css");
 		
@@ -65,7 +55,11 @@ public class AccordionController {
 		VBox mainBox = new VBox();
 		mainBox.setStyle("-fx-padding: 10");
 		mainBox.setSpacing(10);
-		mainBox.getChildren().add(day);
+		
+		//day, dd, mm
+		HBox date = new HBox();
+		Label ddmm = new Label(", " + dd + "/" + mm);
+		date.getChildren().addAll(day,ddmm);
 
 		//Put this HBox into the VBox above
 	    HBox subBox = new HBox();
@@ -78,8 +72,8 @@ public class AccordionController {
 	    subBox.getChildren().add(new ImageView(precTitle));
 	    subBox.getChildren().add(new Label(prec + "%"));
 	    
-	    //Put the VBox above into oneTab
-	    mainBox.getChildren().add(subBox);
+	    //Put Hboxes into VBox, VBox into oneTab
+	    mainBox.getChildren().addAll(date, subBox);
 	    oneTab.setGraphic(mainBox);
 		return oneTab;
     }
@@ -219,19 +213,26 @@ public class AccordionController {
 
     @FXML
     private void initialize(){
-    	days[0] = new Label("Monday");
-    	days[1] = new Label("Tuesday");
-    	days[2] = new Label("Wednesday");
-    	days[3] = new Label("Thursday");
-    	days[4] = new Label("Friday");
-    	days[5] = new Label("Saturday");
-    	days[6] = new Label("Sunday");
+    	//get today
+    	Calendar calendar = Calendar.getInstance();
+    	
+    	//set the days
+       	days[0] = new Label("Sunday");
+    	days[1] = new Label("Monday");
+    	days[2] = new Label("Tuesday");
+    	days[3] = new Label("Wednesday");
+    	days[4] = new Label("Thursday");
+    	days[5] = new Label("Friday");
+    	days[6] = new Label("Saturday");
+ 
 
     	//set initial location to Cambridge for now
     	getData("Cambridge");
     	
     	for(int i=0; i<data.length; i++){
-    		TitledPane oneDay = accord(days[i], i);
+    		TitledPane oneDay = accord(days[calendar.get(Calendar.DAY_OF_WEEK)-1], calendar.get(Calendar.MONTH)+1, calendar.get(Calendar.DATE),i);
+    		calendar.add(Calendar.DATE, 1);
+    		
     		VBox fill = new VBox();
     		fill.setSpacing(10);
     		fill.getChildren().addAll(new Label("Hourly Information:"), content(i));
