@@ -68,6 +68,9 @@ public class AccordionController {
 			windSpeedScroll.get(i).setValue(Integer.toString(todayData[i].windSpeed()));
 			windDirectionScroll.get(i).setValue(todayData[i].direction());
 			tempScroll.get(i).setValue(Integer.toString(todayData[i].temperature()));
+			precScroll.get(i).setValue(Integer.toString(todayData[i].precipProb()) + "%");
+			humScroll.get(i).setValue(Integer.toString(todayData[i].humidity()) + "%");
+			uvScroll.get(i).setValue(Integer.toString(todayData[i].UV()));
     	}    	
     }
 
