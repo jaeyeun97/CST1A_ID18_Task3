@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.shape.Rectangle;
 import javafx.util.StringConverter;
 import np.com.ngopal.control.AutoFillTextBox;
 import java.io.IOException;
@@ -100,8 +101,11 @@ public class MapController {
         setSearchBar();
 
         // Pane Set
+        Rectangle clip = new Rectangle(960, 800);
+        clip.setLayoutX(0);
+        clip.setLayoutY(0);
+        mapImagePane.setClip(clip);
         mapImagePane.getChildren().setAll(MapImages.getObservableList());
-        MapImages.getImagePane(MapType.CLOUD).setVisible(true);
 
         // Link MapSelectors to MapImages
         for(MapType type : MapType.values()){

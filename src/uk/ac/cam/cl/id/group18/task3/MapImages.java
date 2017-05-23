@@ -46,6 +46,11 @@ public class MapImages {
         } else {
             ImageView im = new ImageView(getOverlayImage(currentTimestep).getOverlayImage(type));
             imageViews.put(type, im);
+            if(type == MapType.TEMP){
+                im.setOpacity(0.2);
+            } else {
+                im.setOpacity(0.7);
+            }
             calculateImageView(type);
             return im;
         }
