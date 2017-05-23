@@ -130,6 +130,7 @@ public class MapImages {
 
     public static void updateLocation(Location location) throws IOException {
         currentLocation = location;
+        updateOpenStreetMapView();
         for(MapType type : MapType.values()){
             calculateImagePane(type);
         }

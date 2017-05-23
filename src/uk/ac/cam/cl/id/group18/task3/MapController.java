@@ -48,6 +48,8 @@ public class MapController {
     private Slider zoomSlider;
 
     private Button returnCurrent;
+
+    private ComboBox<Location> box;
     
     private void setSearchBar(){
         //DATA 
@@ -70,7 +72,7 @@ public class MapController {
         searchBar.setSpacing(10); 
         
         //AutoFillBox
-        ComboBox box = new ComboBox(data);
+        box = new ComboBox(data);
         box.setValue(Locations.getInstance().getLocation(310042));
         //AutoFillTextBox box = new AutoFillTextBox(data);
         box.setPrefWidth(450);
@@ -95,11 +97,11 @@ public class MapController {
         
     @FXML
     private void initialize() throws IOException {
-        Location defaultLocation = Locations.getInstance().getLocation(350731);
-        MapImages.setup((int) mapSlider.getValue(),(int) zoomSlider.getValue(), defaultLocation);
         // Search Bar
         setSearchBar();
 
+        Location defaultLocation = box.getValue();
+        MapImages.setup((int) mapSlider.getValue(),(int) zoomSlider.getValue(), defaultLocation);
         // Pane Set
         Rectangle clip = new Rectangle(960, 800);
         clip.setLayoutX(0);
@@ -161,6 +163,12 @@ public class MapController {
                 e.printStackTrace();
             }
         });
-
+        box.valueProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                MapImages.updateLocation(newValue);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
