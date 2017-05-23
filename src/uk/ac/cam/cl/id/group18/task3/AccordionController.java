@@ -113,7 +113,7 @@ public class AccordionController {
 			
 			List<Node> content = hour.getChildren();
 			
-			content.add(new Label(i*3 + ":00"));
+			content.add(new Label(todayData[i].minutesAfterMidnight()/60 + ":00"));
 			
 			HBox wind = new HBox();
 			wind.getStyleClass().add("transparent");
