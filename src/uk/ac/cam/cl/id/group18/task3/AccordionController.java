@@ -66,7 +66,7 @@ public class AccordionController {
 	    subBox.setSpacing(10);
 	    subBox.setAlignment(Pos.CENTER);
 	    subBox.getChildren().add(new ImageView(tempTitle));
-	    subBox.getChildren().add(new Label(temp + "¨¬C"));
+	    subBox.getChildren().add(new Label(temp + "Â°C"));
 	    subBox.getChildren().add(new ImageView(windTitle));
 	    subBox.getChildren().add(new Label(wind + "mph"));
 	    subBox.getChildren().add(new ImageView(precTitle));
@@ -145,7 +145,7 @@ public class AccordionController {
 			Label temp_val = new Label(Integer.toString(todayData[i].temperature()));
 			temp_val.getStyleClass().add("temp_val");
 			temp.getChildren().add(temp_val);
-			Label temp_msmt = new Label("¨¬C");
+			Label temp_msmt = new Label("Â°C");
 			temp_msmt.getStyleClass().add("temp_msmt");
 			temp.getChildren().add(temp_msmt);
 			content.add(temp);
@@ -164,6 +164,7 @@ public class AccordionController {
 
 
 			HBox hum = new HBox();
+			hum.getStyleClass().add("small_content");
 			ImageView humimg = new ImageView();
 			humimg.setImage(new Image("file:images/hum.png", 0, 50, true, true));
 			humimg.getStyleClass().add("humicon");
@@ -175,6 +176,7 @@ public class AccordionController {
 
 
 			HBox uv = new HBox();
+			uv.getStyleClass().add("small_content");
 			ImageView uvimg = new ImageView();
 			uvimg.setImage(new Image("file:images/uv.png", 0, 50, true, true));
 			uvimg.getStyleClass().add("uvicon");
@@ -235,7 +237,9 @@ public class AccordionController {
     		
     		VBox fill = new VBox();
     		fill.setSpacing(10);
-    		fill.getChildren().addAll(new Label("Hourly Information:"), content(i));
+    		Label hourly = new Label("Hourly Information:");
+    		hourly.getStyleClass().add("hourly_text");
+    		fill.getChildren().addAll(hourly, content(i));
     		oneDay.setContent(fill);
     		accordion.getPanes().add(oneDay);
     		if(i==0){
@@ -290,7 +294,7 @@ public class AccordionController {
         Label temp_val = new Label("11");
 		temp_val.getStyleClass().add("temp_val");
     	content.add(temp_val, 0, 1);
-    	Label temp_msmt = new Label("¨¬C");
+    	Label temp_msmt = new Label("ï¿½ï¿½C");
 		temp_msmt.getStyleClass().add("temp_msmt");
     	content.add(temp_msmt, 1, 1);
 
