@@ -19,7 +19,7 @@ public class MapImages {
     private static Map<MapType, ImageView> imageViews = new HashMap<>();
 
     private static int currentTimestep = 0;
-    private static int currentZoom = 7;
+    private static int currentZoom = 8;
     private static Location currentLocation = Locations.getInstance().getLocation(350731);
 
     public static MapImage getOverlayImage(int timestep) throws IOException {

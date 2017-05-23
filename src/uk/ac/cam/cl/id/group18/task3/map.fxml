@@ -8,7 +8,7 @@
 
 <Pane fx:id="mainPane" maxHeight="800.0" maxWidth="960.0" minHeight="800.0" minWidth="960.0" prefHeight="800.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8.0.112" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.MapController">
     <children>
-        <StackPane fx:id="mapImagePane" prefHeight="800.0" prefWidth="960.0" />
+        <StackPane fx:id="mapImagePane" maxHeight="800.0" maxWidth="960.0" minHeight="800.0" minWidth="960.0" prefHeight="800.0" prefWidth="960.0" />
         <Slider fx:id="mapSlider" blockIncrement="3.0" layoutX="41.0" layoutY="742.0" majorTickUnit="3.0" max="36.0" prefHeight="15.0" prefWidth="885.0" showTickLabels="true" showTickMarks="true" />
         <HBox fx:id="searchBar" layoutX="253.0" layoutY="46.0" prefHeight="26.0" prefWidth="600.0" />
         <ListView fx:id="tickBox" layoutX="56.0" layoutY="46.0" prefHeight="125.0" prefWidth="140.0" />

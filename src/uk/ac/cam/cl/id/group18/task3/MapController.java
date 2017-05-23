@@ -107,7 +107,7 @@ public class MapController {
         OpenStreetMap m = MapImages.getOpenStreetMap();
         ImageView i = m.getImageView();
         mapImagePane.getChildren().add(i);
-        AnchorPane p = MapImages.getImagePane(MapType.CLOUD);
+        AnchorPane p = MapImages.getImagePane(MapType.CLOUDANDRAIN);
         mapImagePane.getChildren().add(p);
 
         mapSlider.valueProperty().addListener(
