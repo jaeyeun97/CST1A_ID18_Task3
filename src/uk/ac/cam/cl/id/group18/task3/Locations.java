@@ -27,10 +27,14 @@ public class Locations {
 	private HashMap<String, Integer> map;
 	private static Locations instance = null;
 
-	public static Locations getInstance() throws IOException {
+	public static Locations getInstance() {
 		if(instance == null){
-			instance = new Locations();
-		}
+            try {
+                instance = new Locations();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
 		return instance;
 	}
 

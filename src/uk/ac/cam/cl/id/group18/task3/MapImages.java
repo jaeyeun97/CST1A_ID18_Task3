@@ -19,8 +19,8 @@ public class MapImages {
     private static Map<MapType, ImageView> imageViews = new HashMap<>();
 
     private static int currentTimestep = 0;
-    private static int currentZoom = 6;
-    private static Location currentLocation;
+    private static int currentZoom = 7;
+    private static Location currentLocation = Locations.getInstance().getLocation(350731);
 
     public static MapImage getOverlayImage(int timestep) throws IOException {
         if(images.containsKey(timestep)){
@@ -67,13 +67,14 @@ public class MapImages {
     public static void calculateImagePane(MapType type) throws IOException {
         AnchorPane pane = getImagePane(type);
         ImageView im = getImageView(type);
+
         double width = im.getFitWidth();
         double height = im.getFitHeight();
         double lat = currentLocation.getLatitude();
         double lon = currentLocation.getLongitude();
 
-        double leftOffset = -1.0 * 256.0 * ((lat + 3.5) / 360) * Math.pow(2.0, (double) currentZoom) - ((width-960) / 2.0);
-        double topOffset = -1.0 * 256.0 * ((54.5 - lon) / 360) * Math.pow(2.0, (double) currentZoom) - ((height-800) / 2.0);
+        double leftOffset = -1.0 * 256.0 * ((lon + 3.5) / 360) * Math.pow(2.0, (double) currentZoom) - ((width-960) / 2.0);
+        double topOffset = -1.0 * 256.0 * ((54.5 - lat) / 360) * Math.pow(2.0, (double) currentZoom) - ((height-800) / 2.0);
 
         pane.setTopAnchor(im, topOffset);
         pane.setLeftAnchor(im, leftOffset);
@@ -89,7 +90,7 @@ public class MapImages {
         }
         if (!streetMaps.get(currentLocation).containsKey(currentZoom)){
             double lat = currentLocation.getLatitude();
-            double lon = currentLocation.getLatitude();
+            double lon = currentLocation.getLongitude();
             streetMaps.get(currentLocation).put(currentZoom, new OpenStreetMap(lat, lon, currentZoom));
         }
         return streetMaps.get(currentLocation).get(currentZoom);

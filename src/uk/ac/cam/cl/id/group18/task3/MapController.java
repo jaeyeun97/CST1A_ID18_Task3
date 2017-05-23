@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -43,14 +44,7 @@ public class MapController {
     private void setSearchBar(){
         //DATA 
         ObservableList data = FXCollections.observableArrayList();
-        Locations loc = null;
-        try {
-            loc = Locations.getInstance();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+        Locations loc = Locations.getInstance();
 		if(loc == null){
 			System.out.println("location load failed for autoFillSearchBar");
 		}
@@ -95,9 +89,11 @@ public class MapController {
             }
         }));
 
-        OpenStreetMap m = new OpenStreetMap(54.5, -3.5, 6);
+        OpenStreetMap m = MapImages.getOpenStreetMap();
         ImageView i = m.getImageView();
         mapImagePane.getChildren().add(i);
+        AnchorPane p = MapImages.getImagePane(MapType.CLOUD);
+        mapImagePane.getChildren().add(p);
 
         mapSlider.valueProperty().addListener(
                 (observable, oldVal, newVal) -> mapSlider.setValue(((int) Math.round(newVal.doubleValue()/3))*3)

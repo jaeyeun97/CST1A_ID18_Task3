@@ -47,7 +47,7 @@ public class ImageRequest {
         HashMap<MapType, Image> layers = new HashMap<>();
 
         for(int i = 0; i < jArray.size(); i++){
-            JsonObject jObj = jArray.get(i).getAsJsonObject();
+            JsonObject jObj = jArray.get(i).getAsJsonObject().getAsJsonObject("Service");
             String layer = jObj.getAsJsonPrimitive("LayerName").getAsString();
             JsonObject timeSteps = jObj.getAsJsonObject("Timesteps");
             defaultTime = timeSteps.getAsJsonPrimitive("defaultTime").getAsString();
