@@ -1,4 +1,3 @@
-
 package uk.ac.cam.cl.id.group18.task3;
 
 import java.net.URL;
@@ -110,4 +109,3 @@ public class Locations {
 		//return Arrays.copyOf(locations, locations.length, String[].class);
 	}
 }
-

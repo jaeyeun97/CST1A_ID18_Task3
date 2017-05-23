@@ -73,6 +73,7 @@
 	-fx-background-color: transparent;
 }
 
+
 .hour{
  -fx-background-color: transparent;
  -fx-font: 15pt "Arial";
@@ -109,12 +110,12 @@
 
  .wind_msmt{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: 15pt "Arial";
+  -fx-font: 13pt "Arial";
  }
 
  .wind_dir{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: 15pt "Arial";
+  -fx-font: bold 13pt "Arial";
  }
 
  .temp_val{

@@ -76,10 +76,14 @@ public class MapController {
         //box.setFilterMode(true);
         
         //Label 
-        Image search = new Image("file:images/search.png", 0, 20, true, true);
+        Image search = new Image("file:images/search.png", 0, 40, true, true);
         
         //Button
-        returnCurrent = new Button("Search");
+        //returnCurrent = new Button("Search");
+        Image buttonimg = new Image("file:images/search3.png");
+        ImageView buttonimgv = new ImageView(buttonimg);
+        returnCurrent = new Button("", new ImageView(buttonimg));
+        returnCurrent.setMaxHeight(Double.MAX_VALUE);
         returnCurrent.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 System.out.println(box.getValue()); //this gives you the corresponding Location object, not just string
@@ -89,7 +93,8 @@ public class MapController {
 
         
         //put them into HBox
-        searchBar.getChildren().addAll(new ImageView(search), box, returnCurrent); 
+        searchBar.getChildren().addAll(/*new ImageView(search),*/ box, returnCurrent);
+        searchBar.setMaxHeight(5);
     }
         
     @FXML

@@ -13,6 +13,8 @@ import java.util.Map;
  *
  * So for this class, I guess we will just have to zoom in to the met office data and present it.
  */
+
+
 public class MapImage {
     private int timestep;
     private Map<MapType, Image> overlayImages = new HashMap<>();
@@ -30,3 +32,4 @@ public class MapImage {
         }
     }
 }
+
