@@ -1,29 +1,19 @@
 package uk.ac.cam.cl.id.group18.task3;
 
-import uk.ac.cam.cl.id.group18.task3.AccordionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.StringConverter;
-import np.com.ngopal.control.AutoFillTextBox;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.Map;
-import uk.ac.cam.cl.id.group18.task3.Location;
 
 /**
  * Created by Charles Yoon on 17. 5. 16.
@@ -54,7 +44,8 @@ public class MapController {
     // private Button returnCurrent;
 
     private ComboBox<Location> box;
-    
+    private AccordionController accordionController = null;
+
     private void setSearchBar(){
         //DATA 
         ObservableList data = FXCollections.observableArrayList();
@@ -177,10 +168,13 @@ public class MapController {
         box.valueProperty().addListener((observable, oldValue, newValue) -> {
             try {
                 MapImages.updateLocation(newValue);
+                this.accordionController.update(newValue);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
-       
+    }
+    public void setAccordionController(AccordionController controller){
+        this.accordionController = controller;
     }
 }

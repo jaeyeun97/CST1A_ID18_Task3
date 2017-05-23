@@ -23,11 +23,14 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("task3.fxml"));
-        Parent accordion = FXMLLoader.load(getClass().getResource("accordion.fxml"));
-        Parent map = FXMLLoader.load(getClass().getResource("map.fxml"));
+        FXMLLoader accordionLoader = new FXMLLoader(getClass().getResource("accordion.fxml"));
+        Parent accordion = accordionLoader.load();
+        FXMLLoader mapLoader = new FXMLLoader(getClass().getResource("map.fxml"));
+        Parent map = mapLoader.load();
         ((GridPane) root).add(map, 0, 0);
         ((GridPane) root).add(accordion, 1, 0);
-        
+        ((MapController) mapLoader.getController()).setAccordionController(accordionLoader.getController());
+
         Scene scene = new Scene(root, 1280, 800);
         scene.getStylesheets().add("file:css/weatherApp.css");
         scene.getStylesheets().add("file:css/searchBar.css");
