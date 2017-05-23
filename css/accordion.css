@@ -105,7 +105,7 @@
 }
 
  .wind_val .text{
-  -fx-font: bold 30pt "Arial";
+  -fx-font: bold 20pt "Arial";
 }
 
  .wind_msmt{
@@ -120,7 +120,7 @@
 
  .temp_val{
   -fx-text-fill:  rgb(253,181,21);
-  -fx-font: bold 30pt "Arial";
+  -fx-font: bold 20pt "Arial";
   -fx-text-alignment: right;
  }
 
