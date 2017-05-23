@@ -6,7 +6,10 @@ import java.io.*;
 import java.util.*;
 import com.google.gson.*;
 import javafx.scene.image.Image;
-
+/**
+ * Created by Leo Williams.
+ * Written by Leo Williams, Charles Yoon.
+ */
 public class ImageRequest {
 
 	public static String defaultTime = "";

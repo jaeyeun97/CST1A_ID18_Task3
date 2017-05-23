@@ -11,7 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jaeyeun on 17. 5. 22.
+ * Created by Charles Yoon on 17. 5. 22.
+ * Written by Charles Yoon.
  */
 public class MapImages {
     private static Map<Integer, MapImage> images = new HashMap<>();

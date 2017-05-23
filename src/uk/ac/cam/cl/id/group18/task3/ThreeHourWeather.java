@@ -1,5 +1,8 @@
 package uk.ac.cam.cl.id.group18.task3;
-
+/**
+ * Created by Leo Williams.
+ * Written by Leo Williams.
+ */
 public class ThreeHourWeather{
 	private String D;
 	private int F;

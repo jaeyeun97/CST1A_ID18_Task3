@@ -12,7 +12,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jaeyeun on 17. 5. 19.
+ * Created by Charles Yoon on 17. 5. 19.
+ * Written by Charles Yoon.
  */
 public class MapSelector {
     private static Map<MapType, MapSelector> instances = new HashMap<>();

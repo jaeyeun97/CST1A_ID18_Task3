@@ -4,7 +4,10 @@ import java.util.*;
 import com.google.gson.Gson;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-
+/**
+ * Created by Leo Williams.
+ * Written by Leo Williams, Charles Yoon.
+ */
 public class Location{
 	private String elevation;
 	private int id;

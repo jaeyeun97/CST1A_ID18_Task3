@@ -1,9 +1,3 @@
-//the autocomplete box is not working completely, but cannot fix it - 
-//even looked at the source code but seems like I cannot change the behaviour
-//for more information, look at https://github.com/privatejava/javafx-autocomplete-field for its code
-//and http://blog.ngopal.com.np/2011/07/04/autofill-textbox-with-filtermode-in-javafx-2-0-custom-control/comment-page-3/#comments
-//for what it's supposed to be
-
 package uk.ac.cam.cl.id.group18.task3;
 
 import javafx.collections.FXCollections;
@@ -31,8 +25,17 @@ import java.util.Map;
 import uk.ac.cam.cl.id.group18.task3.Location;
 
 /**
- * Created by jaeyeun on 17. 5. 16.
+ * Created by Charles Yoon on 17. 5. 16.
+ * Written by Charles Yoon, Seohyun Woo.
+ *
+ * Seo:
+ * the autocomplete box is not working completely, but cannot fix it -
+ * even looked at the source code but seems like I cannot change the behaviour
+ * for more information, look at https://github.com/privatejava/javafx-autocomplete-field for its code
+ * and http://blog.ngopal.com.np/2011/07/04/autofill-textbox-with-filtermode-in-javafx-2-0-custom-control/comment-page-3/#comments
+ * for what it's supposed to be
  */
+
 public class MapController {
     @FXML
     private Pane mainPane;

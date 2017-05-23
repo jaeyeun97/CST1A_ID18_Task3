@@ -9,7 +9,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by jaeyeun on 17. 5. 20.
+ * Created by Charles Yoon on 17. 5. 20.
+ * Written by Charles Yoon.
  *
  * So for this class, I guess we will just have to zoom in to the met office data and present it.
  */

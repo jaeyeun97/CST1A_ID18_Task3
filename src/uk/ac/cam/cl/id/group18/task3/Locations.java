@@ -6,6 +6,10 @@ import java.net.MalformedURLException;
 import java.util.*;
 import java.io.*;
 import com.google.gson.*;
+/**
+ * Created by Leo Williams.
+ * Written by Leo Williams, Charles Yoon.
+ */
 
 //Initialising the object fetches the data.
 //
