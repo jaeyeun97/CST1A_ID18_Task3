@@ -1,5 +1,6 @@
 package uk.ac.cam.cl.id.group18.task3;
 
+import uk.ac.cam.cl.id.group18.task3.AccordionController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -178,5 +179,6 @@ public class MapController {
                 e.printStackTrace();
             }
         });
+       
     }
 }

@@ -22,7 +22,7 @@ public class MapImages {
 
     private static int currentTimestep;
     private static int currentZoom ;
-    private static Location currentLocation;
+    public static Location currentLocation;
     private static ImageView streetMapView = new ImageView();
 
     public static void setup(int timestep, int zoom, Location location){

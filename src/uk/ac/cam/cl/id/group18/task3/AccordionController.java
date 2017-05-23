@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Date;
 import java.util.Calendar;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -25,12 +27,19 @@ public class AccordionController {
     @FXML
     private Accordion accordion;
     private Label[] days = new Label[7];
-    private ThreeHourWeather[][] data = null;
+    public ThreeHourWeather[][] data = null;
     private Image windTitle = new Image("file:images/titleWind.png", 0, 25, true, true);
     private Image tempTitle = new Image("file:images/titleTemp.png", 0, 25, true, true);
     private Image precTitle = new Image("file:images/titlePrec.png", 0, 25, true, true);
+    public List<StringProperty> windAvr = new ArrayList<>();
+    public List<StringProperty> tempAvr = new ArrayList<>();
+    public List<StringProperty> precAvr = new ArrayList<>();
+    
+    public void update(Location loc){
+    	getData(loc.getName());
+    	
+    }
 
-    		
     private TitledPane accord(Label day, int dd, int mm, int whichday){
 		TitledPane oneTab = new TitledPane();
 		oneTab.getStylesheets().add("file:css/accordion.css");
@@ -66,11 +75,16 @@ public class AccordionController {
 	    subBox.setSpacing(10);
 	    subBox.setAlignment(Pos.CENTER);
 	    subBox.getChildren().add(new ImageView(tempTitle));
-	    subBox.getChildren().add(new Label(temp + "°C"));
+	    Label tempp = new Label();
+	    StringProperty tempProp = new SimpleStringProperty();
+	    tempProp.setValue(temp + "°C");
+	    tempp.textProperty().bind(tempProp);
+	    subBox.getChildren().add(tempp);
 	    subBox.getChildren().add(new ImageView(windTitle));
 	    subBox.getChildren().add(new Label(wind + "mph"));
 	    subBox.getChildren().add(new ImageView(precTitle));
 	    subBox.getChildren().add(new Label(prec + "%"));
+	    
 	    
 	    //Put Hboxes into VBox, VBox into oneTab
 	    mainBox.getChildren().addAll(date, subBox);
