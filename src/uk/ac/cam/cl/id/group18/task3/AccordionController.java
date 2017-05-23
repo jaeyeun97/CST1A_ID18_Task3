@@ -115,6 +115,7 @@ public class AccordionController {
 	    tempProp.setValue(temp + "°C");
 	    tempp.textProperty().bind(tempProp);
 	    subBox.getChildren().add(tempp);
+	    tempAvr.add(tempProp);
 
 	    subBox.getChildren().add(new ImageView(windTitle));
 		Label windd = new Label();
@@ -122,6 +123,7 @@ public class AccordionController {
 		windProp.setValue(wind + "mph");
 		windd.textProperty().bind(windProp);
 	    subBox.getChildren().add(windd);
+	    windAvr.add(windProp);
 
 	    subBox.getChildren().add(new ImageView(precTitle));
 	    Label precc = new Label();
@@ -129,6 +131,7 @@ public class AccordionController {
 	    precProp.setValue(prec + "%");
 	    precc.textProperty().bind(precProp);
 	    subBox.getChildren().add(precc);
+	    precAvr.add(precProp);
 	    
 	    
 	    //Put Hboxes into VBox, VBox into oneTab
