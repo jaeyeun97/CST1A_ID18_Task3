@@ -26,7 +26,7 @@ import uk.ac.cam.cl.id.group18.task3.Location;
 
 /**
  * Created by Charles Yoon on 17. 5. 16.
- * Written by Charles Yoon, Seohyun Woo.
+ * Written by Charles Yoon, Seohyun Woo, Theodora Zamfirache.
  *
  * Seo:
  * the autocomplete box is not working completely, but cannot fix it -
