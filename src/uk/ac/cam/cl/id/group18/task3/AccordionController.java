@@ -160,22 +160,35 @@ public class AccordionController {
 			List<Node> content = hour.getChildren();
 			
 			content.add(new Label(todayData[i].minutesAfterMidnight()/60 + ":00"));
-			
+
+
 			HBox wind = new HBox();
 			wind.getStyleClass().add("transparent");
 			ImageView windimg = new ImageView();
 			windimg.setImage(new Image("file:images/wind.png", 0, 50, true, true));
 			windimg.getStyleClass().add("windicon");
 			wind.getChildren().add(windimg);
-			Label wind_val = new Label(Integer.toString(todayData[i].windSpeed()));
+
+			Label wind_val = new Label();
+			StringProperty windSpeedProp = new SimpleStringProperty();
+			windSpeedProp.setValue(Integer.toString(todayData[i].windSpeed()));
+			wind_val.textProperty().bind(windSpeedProp);
+			windSpeedScroll.add(windSpeedProp);
+
 			wind_val.getStyleClass().add("wind_val");
 			wind.getChildren().add(wind_val);
-			
+
 			VBox windInfo = new VBox();
 ;			Label wind_msmt = new Label("mph");
 			wind_msmt.getStyleClass().add("wind_msmt");
 			windInfo.getChildren().add(wind_msmt);
-			Label wind_dir = new Label(todayData[i].direction());
+
+            Label wind_dir = new Label();
+            StringProperty windDirectionProp = new SimpleStringProperty();
+            windDirectionProp.setValue(todayData[i].direction());
+            wind_dir.textProperty().bind(windDirectionProp);
+            windDirectionScroll.add(windDirectionProp);
+
 			wind_dir.getStyleClass().add("wind_dir");
 			windInfo.getChildren().add(wind_dir);
 			
@@ -183,12 +196,19 @@ public class AccordionController {
 			content.add(wind);
 
 
+
 			HBox temp = new HBox();
 			ImageView tempimg = new ImageView();
 			tempimg.setImage(new Image("file:images/temp.png", 0, 50, true, true));
 			tempimg.getStyleClass().add("tempicon");
 			temp.getChildren().add(tempimg);
-			Label temp_val = new Label(Integer.toString(todayData[i].temperature()));
+
+            Label temp_val = new Label();
+            StringProperty tempProp = new SimpleStringProperty();
+            tempProp.setValue(Integer.toString(todayData[i].temperature()));
+            temp_val.textProperty().bind(tempProp);
+            tempScroll.add(tempProp);
+
 			temp_val.getStyleClass().add("temp_val");
 			temp.getChildren().add(temp_val);
 			Label temp_msmt = new Label("°C");
@@ -203,7 +223,13 @@ public class AccordionController {
 			precimg.setImage(new Image("file:images/prec.png", 0, 50, true, true));
 			precimg.getStyleClass().add("precicon");
 			prec.getChildren().add(precimg);
-			Label prec_val = new Label(Integer.toString(todayData[i].precipProb()) + "%"); //precipitation probability for now
+
+            Label prec_val = new Label();
+            StringProperty precProp = new SimpleStringProperty();
+            precProp.setValue(Integer.toString(todayData[i].precipProb()) + "%");
+            prec_val.textProperty().bind(precProp);
+            precScroll.add(precProp);
+
 			prec_val.getStyleClass().add("small_val");
 			prec.getChildren().add(prec_val);
 			content.add(prec);
@@ -215,7 +241,13 @@ public class AccordionController {
 			humimg.setImage(new Image("file:images/hum.png", 0, 50, true, true));
 			humimg.getStyleClass().add("humicon");
 			hum.getChildren().add(humimg);
-			Label hum_val = new Label(Integer.toString(todayData[i].humidity()) + "%");
+
+            Label hum_val = new Label();
+            StringProperty humProp = new SimpleStringProperty();
+            humProp.setValue(Integer.toString(todayData[i].humidity()) + "%");
+            hum_val.textProperty().bind(humProp);
+            humScroll.add(humProp);
+
 			hum_val.getStyleClass().add("small_val");
 			hum.getChildren().add(hum_val);
 			content.add(hum);
@@ -227,7 +259,13 @@ public class AccordionController {
 			uvimg.setImage(new Image("file:images/uv.png", 0, 50, true, true));
 			uvimg.getStyleClass().add("uvicon");
 			uv.getChildren().add(uvimg);
-			Label uv_val = new Label(Integer.toString(todayData[i].UV()));
+
+            Label uv_val = new Label();
+            StringProperty uvProp = new SimpleStringProperty();
+            uvProp.setValue(Integer.toString(todayData[i].UV()));
+            uv_val.textProperty().bind(uvProp);
+            uvScroll.add(uvProp);
+
 			uv_val.getStyleClass().add("small_val");
 			uv.getChildren().add(uv_val);
 			content.add(uv);
