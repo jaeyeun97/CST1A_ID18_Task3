@@ -34,12 +34,13 @@ public class AccordionController {
     public List<StringProperty> windAvr = new ArrayList<>();
     public List<StringProperty> tempAvr = new ArrayList<>();
     public List<StringProperty> precAvr = new ArrayList<>();
-    public List<StringProperty> windSpeedScroll = new ArrayList<>();
-	public List<StringProperty> windDirectionScroll = new ArrayList<>();
-    public List<StringProperty> tempScroll = new ArrayList<>();
-    public List<StringProperty> precScroll = new ArrayList<>();
-    public List<StringProperty> humScroll = new ArrayList<>();
-    public List<StringProperty> uvScroll = new ArrayList<>();
+    
+    public List<List<StringProperty>> windSpeedScroll = new ArrayList<>();
+	public List<List<StringProperty>> windDirectionScroll = new ArrayList<>();
+    public List<List<StringProperty>> tempScroll = new ArrayList<>();
+    public List<List<StringProperty>> precScroll = new ArrayList<>();
+    public List<List<StringProperty>> humScroll = new ArrayList<>();
+    public List<List<StringProperty>> uvScroll = new ArrayList<>();
 
     public void update(Location loc){
     	getData(loc.getName());
@@ -65,12 +66,15 @@ public class AccordionController {
 			}
 			
 			//update ScrollPane
-			windSpeedScroll.get(i).setValue(Integer.toString(todayData[i].windSpeed()));
-			windDirectionScroll.get(i).setValue(todayData[i].direction());
-			tempScroll.get(i).setValue(Integer.toString(todayData[i].temperature()));
-			precScroll.get(i).setValue(Integer.toString(todayData[i].precipProb()) + "%");
-			humScroll.get(i).setValue(Integer.toString(todayData[i].humidity()) + "%");
-			uvScroll.get(i).setValue(Integer.toString(todayData[i].UV()));
+			for(int j=0; j<data[0].length; j++){
+				windSpeedScroll.get(i).get(j).setValue(Integer.toString(todayData[i].windSpeed()));
+				windDirectionScroll.get(i).get(j).setValue(todayData[i].direction());
+				tempScroll.get(i).get(j).setValue(Integer.toString(todayData[i].temperature()));
+				precScroll.get(i).get(j).setValue(Integer.toString(todayData[i].precipProb()) + "%");
+				humScroll.get(i).get(j).setValue(Integer.toString(todayData[i].humidity()) + "%");
+				uvScroll.get(i).get(j).setValue(Integer.toString(todayData[i].UV()));
+			}
+
     	}    	
     }
 
@@ -156,6 +160,18 @@ public class AccordionController {
     
     private ScrollPane content(int day){
     	ThreeHourWeather[] todayData = data[day];
+    	List<StringProperty> windSpeedTemp = new ArrayList<>();
+    	List<StringProperty> windDirTemp = new ArrayList<>();
+    	List<StringProperty> tempTemp = new ArrayList<>();
+    	List<StringProperty> precTemp = new ArrayList<>();
+    	List<StringProperty> humTemp = new ArrayList<>();
+    	List<StringProperty> uvTemp = new ArrayList<>();
+    	windSpeedScroll.add(windSpeedTemp);
+    	windDirectionScroll.add(windDirTemp);
+    	tempScroll.add(tempTemp);
+    	precScroll.add(precTemp);
+    	humScroll.add(humTemp);
+    	uvScroll.add(uvTemp);
     	
 		ScrollPane base = new ScrollPane();
 		base.getStyleClass().add("scroll-pane");
@@ -189,7 +205,7 @@ public class AccordionController {
 			StringProperty windSpeedProp = new SimpleStringProperty();
 			windSpeedProp.setValue(Integer.toString(todayData[i].windSpeed()));
 			wind_val.textProperty().bind(windSpeedProp);
-			windSpeedScroll.add(windSpeedProp);
+			windSpeedScroll.get(day).add(windSpeedProp);
 
 			wind_val.getStyleClass().add("wind_val");
 			wind.getChildren().add(wind_val);
@@ -203,7 +219,7 @@ public class AccordionController {
             StringProperty windDirectionProp = new SimpleStringProperty();
             windDirectionProp.setValue(todayData[i].direction());
             wind_dir.textProperty().bind(windDirectionProp);
-            windDirectionScroll.add(windDirectionProp);
+            windDirectionScroll.get(day).add(windDirectionProp);
 
 			wind_dir.getStyleClass().add("wind_dir");
 			windInfo.getChildren().add(wind_dir);
@@ -223,7 +239,7 @@ public class AccordionController {
             StringProperty tempProp = new SimpleStringProperty();
             tempProp.setValue(Integer.toString(todayData[i].temperature()));
             temp_val.textProperty().bind(tempProp);
-            tempScroll.add(tempProp);
+            tempScroll.get(day).add(tempProp);
 
 			temp_val.getStyleClass().add("temp_val");
 			temp.getChildren().add(temp_val);
@@ -244,7 +260,7 @@ public class AccordionController {
             StringProperty precProp = new SimpleStringProperty();
             precProp.setValue(Integer.toString(todayData[i].precipProb()) + "%");
             prec_val.textProperty().bind(precProp);
-            precScroll.add(precProp);
+            precScroll.get(day).add(precProp);
 
 			prec_val.getStyleClass().add("small_val");
 			prec.getChildren().add(prec_val);
@@ -262,7 +278,7 @@ public class AccordionController {
             StringProperty humProp = new SimpleStringProperty();
             humProp.setValue(Integer.toString(todayData[i].humidity()) + "%");
             hum_val.textProperty().bind(humProp);
-            humScroll.add(humProp);
+            humScroll.get(day).add(humProp);
 
 			hum_val.getStyleClass().add("small_val");
 			hum.getChildren().add(hum_val);
@@ -280,7 +296,7 @@ public class AccordionController {
             StringProperty uvProp = new SimpleStringProperty();
             uvProp.setValue(Integer.toString(todayData[i].UV()));
             uv_val.textProperty().bind(uvProp);
-            uvScroll.add(uvProp);
+            uvScroll.get(day).add(uvProp);
 
 			uv_val.getStyleClass().add("small_val");
 			uv.getChildren().add(uv_val);
