@@ -1,5 +1,8 @@
 package uk.ac.cam.cl.id.group18.task3;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 
@@ -63,6 +66,7 @@ public class MapImages {
             AnchorPane pane = new AnchorPane();
             pane.setPrefHeight(800);
             pane.setPrefWidth(960);
+            pane.setVisible(false);
             imagePanes.put(type, pane);
             calculateImagePane(type);
             return pane;
@@ -131,5 +135,14 @@ public class MapImages {
         for(MapType type: MapType.values()){
             getImageView(type).setImage(getOverlayImage(timestep).getOverlayImage(type));
         }
+    }
+
+    public static ObservableList<Node> getObservableList() throws IOException {
+        ObservableList<Node> list = FXCollections.observableArrayList();
+        list.add(getOpenStreetMapView());
+        for(MapType type : MapType.values()){
+            list.add(getImagePane(type));
+        }
+        return list;
     }
 }

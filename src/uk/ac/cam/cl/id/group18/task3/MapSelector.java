@@ -32,7 +32,7 @@ public class MapSelector {
 
     public static Map<MapType, MapSelector> getInstances(){
         for(MapType type: MapType.values()){
-            if(type != MapType.CLOUDANDRAIN && !instances.containsKey(type)){
+            if(!instances.containsKey(type)){
                 instances.put(type, new MapSelector(getName(type)));
             }
         }
@@ -40,7 +40,7 @@ public class MapSelector {
     }
 
     public static MapSelector getInstance(MapType type){
-        if(type != MapType.CLOUDANDRAIN && !instances.containsKey(type)){
+        if(!instances.containsKey(type)){
             instances.put(type, new MapSelector(getName(type)));
         }
         return instances.get(type);

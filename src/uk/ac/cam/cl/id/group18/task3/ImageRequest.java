@@ -55,27 +55,24 @@ public class ImageRequest {
 
             timeStep = timeStepsArray[timeStep/timeStepsArray[1]]; //Forces timestep onto a suitable value, scaled by the first non-zero val
 
-            MapType map;
-
-            Image im = getImage(layer, defaultTime, timeStep);
-
+            MapType map = null;
             switch(layer) {
-                case "Precipitation_Rate": map = MapType.RAINFALL;
-                    layers.put(map, im);
+                case "Precipitation_Rate":
+                    map = MapType.RAINFALL;
                     break;
-                case "Total_Cloud_Cover": map = MapType.CLOUD;
-                    layers.put(map, im);
+                case "Total_Cloud_Cover":
+                    map = MapType.CLOUD;
                     break;
-                case "Total_Cloud_Cover_Precip_Rate_Overlaid": map = MapType.CLOUDANDRAIN;
-                    layers.put(map, im);
+                case "Temperature":
+                    map = MapType.TEMP;
                     break;
-                case "Temperature": map = MapType.TEMP;
-                    layers.put(map, im);
+                case "Atlantic":
+                    map = MapType.PRESSURE;
                     break;
-
-                case "Atlantic": map = MapType.PRESSURE;
-                    layers.put(map, im);
-                    break;
+            }
+            if(map != null) {
+                Image im = getImage(layer, defaultTime, timeStep);
+                layers.put(map, im);
             }
         }
 

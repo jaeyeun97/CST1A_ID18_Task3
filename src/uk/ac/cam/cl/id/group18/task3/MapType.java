@@ -7,6 +7,6 @@ import javafx.beans.property.SimpleBooleanProperty;
  * Created by jaeyeun on 17. 5. 18.
  */
 public enum MapType {
-    RAINFALL, CLOUD, CLOUDANDRAIN, TEMP, PRESSURE;
+    RAINFALL, CLOUD, TEMP, PRESSURE;
 }
 

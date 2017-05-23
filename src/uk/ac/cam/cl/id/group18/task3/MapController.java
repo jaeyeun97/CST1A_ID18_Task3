@@ -99,11 +99,16 @@ public class MapController {
         // Search Bar
         setSearchBar();
 
-        ImageView iv = MapImages.getOpenStreetMapView();
-        AnchorPane p = MapImages.getImagePane(MapType.CLOUDANDRAIN);
-        mapImagePane.getChildren().add(iv);
-        mapImagePane.getChildren().add(p);
+        // Pane Set
+        mapImagePane.getChildren().setAll(MapImages.getObservableList());
+        MapImages.getImagePane(MapType.CLOUD).setVisible(true);
 
+        // Link MapSelectors to MapImages
+        for(MapType type : MapType.values()){
+            MapSelector.getInstance(type).getSelectedProperty().bindBidirectional(
+                    MapImages.getImagePane(type).visibleProperty()
+            );
+        }
         // Tick Box
         tickBox.setItems(MapSelector.getObservableList());
         tickBox.setCellFactory(CheckBoxListCell.forListView(MapSelector::getSelectedProperty,
