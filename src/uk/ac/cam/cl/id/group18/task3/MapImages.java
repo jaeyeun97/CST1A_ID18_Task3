@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.sun.webkit.graphics.WCImage.getImage;
-
 /**
  * Created by jaeyeun on 17. 5. 22.
  */
@@ -18,9 +16,16 @@ public class MapImages {
     private static Map<MapType, AnchorPane> imagePanes = new HashMap<>();
     private static Map<MapType, ImageView> imageViews = new HashMap<>();
 
-    private static int currentTimestep = 0;
-    private static int currentZoom = 8;
-    private static Location currentLocation = Locations.getInstance().getLocation(350731);
+    private static int currentTimestep;
+    private static int currentZoom ;
+    private static Location currentLocation;
+    private static ImageView streetMapView = new ImageView();
+
+    public static void setup(int timestep, int zoom, Location location){
+        currentLocation = location;
+        currentTimestep = timestep;
+        currentZoom = zoom;
+    }
 
     public static MapImage getOverlayImage(int timestep) throws IOException {
         if(images.containsKey(timestep)){
@@ -96,8 +101,18 @@ public class MapImages {
         return streetMaps.get(currentLocation).get(currentZoom);
     }
 
+    public static ImageView getOpenStreetMapView() throws IOException {
+        updateOpenStreetMapView();
+        return streetMapView;
+    }
+
+    public static void updateOpenStreetMapView() throws IOException {
+        streetMapView.setImage(getOpenStreetMap().getImage());
+    }
+
     public static void updateZoom(int zoom) throws IOException {
         currentZoom = zoom;
+        updateOpenStreetMapView();
         for(MapType type : MapType.values()){
             calculateImageView(type);
             calculateImagePane(type);
