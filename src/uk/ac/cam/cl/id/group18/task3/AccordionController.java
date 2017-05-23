@@ -34,26 +34,30 @@ public class AccordionController {
     public List<StringProperty> windAvr = new ArrayList<>();
     public List<StringProperty> tempAvr = new ArrayList<>();
     public List<StringProperty> precAvr = new ArrayList<>();
-    
+    public List<StringProperty> windSpeedScroll = new ArrayList<>();
+	public List<StringProperty> windDirectionScroll = new ArrayList<>();
+    public List<StringProperty> tempScroll = new ArrayList<>();
+    public List<StringProperty> precScroll = new ArrayList<>();
+    public List<StringProperty> humScroll = new ArrayList<>();
+    public List<StringProperty> uvScroll = new ArrayList<>();
+
     public void update(Location loc){
     	getData(loc.getName());
-    	for(int i=0; i<data.length; i++){
-    		
-    	}
-    	//calculating average weather
-    			ThreeHourWeather[] todayData = data[whichday];
-    			Double temp = 0.0;
-    			Double wind = 0.0;
-    			Double prec = 0.0;
-    			for(ThreeHourWeather w : todayData){
-    				temp += w.temperature();
-    				wind += w.windSpeed();
-    				prec += w.precipProb();
-    			}
-    			temp = ((double) Math.round(temp * 10/todayData.length)) / 10;
-    			wind = ((double) Math.round(wind * 10/todayData.length)) / 10;
-    			prec = ((double) Math.round(prec * 10/todayData.length)) / 10;
-    	
+    	for(int i=0; i<data.length; i++) {
+			//calculating average weather
+			ThreeHourWeather[] todayData = data[i];
+			Double temp = 0.0;
+			Double wind = 0.0;
+			Double prec = 0.0;
+			for (ThreeHourWeather w : todayData) {
+				temp += w.temperature();
+				wind += w.windSpeed();
+				prec += w.precipProb();
+			}
+			temp = ((double) Math.round(temp * 10 / todayData.length)) / 10;
+			wind = ((double) Math.round(wind * 10 / todayData.length)) / 10;
+			prec = ((double) Math.round(prec * 10 / todayData.length)) / 10;
+		}
     	
     }
 
@@ -91,16 +95,27 @@ public class AccordionController {
 	    HBox subBox = new HBox();
 	    subBox.setSpacing(10);
 	    subBox.setAlignment(Pos.CENTER);
+
 	    subBox.getChildren().add(new ImageView(tempTitle));
 	    Label tempp = new Label();
 	    StringProperty tempProp = new SimpleStringProperty();
 	    tempProp.setValue(temp + "°C");
 	    tempp.textProperty().bind(tempProp);
 	    subBox.getChildren().add(tempp);
+
 	    subBox.getChildren().add(new ImageView(windTitle));
-	    subBox.getChildren().add(new Label(wind + "mph"));
+		Label windd = new Label();
+		StringProperty windProp = new SimpleStringProperty();
+		windProp.setValue(wind + "mph");
+		windd.textProperty().bind(windProp);
+	    subBox.getChildren().add(windd);
+
 	    subBox.getChildren().add(new ImageView(precTitle));
-	    subBox.getChildren().add(new Label(prec + "%"));
+	    Label precc = new Label();
+	    StringProperty precProp = new SimpleStringProperty();
+	    precProp.setValue(prec + "%");
+	    precc.textProperty().bind(precProp);
+	    subBox.getChildren().add(precc);
 	    
 	    
 	    //Put Hboxes into VBox, VBox into oneTab
