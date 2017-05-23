@@ -23,8 +23,11 @@ import javafx.util.StringConverter;
 import np.com.ngopal.control.AutoFillTextBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import uk.ac.cam.cl.id.group18.task3.Location;
 
 /**
  * Created by jaeyeun on 17. 5. 16.
@@ -47,7 +50,6 @@ public class MapController {
     
     private void setSearchBar(){
         //DATA 
-    	Map<String, Location> name2Loc = new HashMap<>();
         ObservableList data = FXCollections.observableArrayList();
         Locations loc = Locations.getInstance();
 		if(loc == null){
@@ -56,12 +58,19 @@ public class MapController {
         for(int j=0; j<loc.locations.length; j++){
             data.add(loc.locations[j]);
         } 
+        Collections.sort(data, new Comparator<Location>(){
+        	@Override
+        	public int compare(Location l1, Location l2){
+        		return l1.toString().compareTo(l2.toString());
+        	}
+        });
         
         //Layout 
         searchBar.setSpacing(10); 
         
         //AutoFillBox
         ComboBox box = new ComboBox(data);
+        box.setValue(Locations.getInstance().getLocation(310042));
         //AutoFillTextBox box = new AutoFillTextBox(data);
         box.setPrefWidth(450);
         //box.setFilterMode(true);

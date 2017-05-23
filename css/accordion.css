@@ -62,9 +62,20 @@
 }
 
 
+.scroll-pane > .viewport {
+	-fx-background-color: transparent;
+}
 
+.scroll-pane{
+	-fx-background-color: transparent;
+}
+.transparent{
+	-fx-background-color: transparent;
+}
 
-
+.hour{
+	-fx-background-color: transparent;	
+}
 
 .hour .text{
  -fx-fill: rgb(253,181,21);
@@ -72,38 +83,51 @@
  -fx-stroke-width: 0.5px;
 }
 
- .wind_val{
-  -fx-font: 46pt "Arial";
+.hour2{
+	-fx-background-color: rgb(0,0,0,0.2);
+}
+
+.hour2 .text{
+ -fx-fill: rgb(253,181,21);
+ -fx-stroke: darkblue;
+ -fx-stroke-width: 0.5px;
+}
+
+
+
+ .wind_val .text{
+  -fx-font: 30pt "Arial";
 }
 
  .wind_msmt{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: 20pt "Arial";
+  -fx-font: 15pt "Arial";
  }
 
  .wind_dir{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: 30pt "Arial";
+  -fx-font: 15pt "Arial";
  }
 
  .temp_val{
   -fx-text-fill:  rgb(253,181,21);
-  -fx-font: 46pt "Arial";
+  -fx-font: 30pt "Arial";
+  -fx-text-alignment: right;
  }
 
  .temp_msmt{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: 30pt "Arial";
+  -fx-font: 15pt "Arial";
  }
 
  .small_name{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: bold 15pt "Arial";
+  -fx-font: bold 10pt "Arial";
  }
 
 
  .small_val{
   -fx-text-fill: #BACFE4;
-  -fx-font: bold 15pt "Arial";
+  -fx-font: bold 10pt "Arial";
   -fx-text-alignment: center;
  }

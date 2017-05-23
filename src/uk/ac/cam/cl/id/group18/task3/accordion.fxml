@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.AccordionController">
+
+<AnchorPane maxHeight="800.0" maxWidth="420.0" minHeight="800.0" minWidth="420.0" prefHeight="800.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="uk.ac.cam.cl.id.group18.task3.AccordionController">
    <children>
-      <Accordion fx:id="accordion" maxHeight="800.0" maxWidth="420.0" minHeight="420" minWidth="420.0" prefHeight="800.0" prefWidth="420.0">
+      <Accordion fx:id="accordion" maxHeight="800.0" maxWidth="420.0" minHeight="800.0" minWidth="420.0" prefHeight="800.0" prefWidth="420.0">
+        <panes>
+        </panes>
       </Accordion>
    </children>
 </AnchorPane>

@@ -1,6 +1,9 @@
 package uk.ac.cam.cl.id.group18.task3;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javafx.fxml.FXML;
@@ -10,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderStroke;
 import javafx.scene.layout.BorderStrokeStyle;
@@ -22,6 +26,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import uk.ac.cam.cl.id.group18.task3.Locations;
 
 /**
  * Created by jaeyeun on 17. 5. 16.
@@ -29,19 +34,32 @@ import javafx.stage.Stage;
 public class AccordionController {
     @FXML
     private Accordion accordion;
-    private Image sunnyCloud = new Image("https://cdn.pixabay.com/photo/2012/04/18/13/21/clouds-37009_960_720.png", 0, 24, true, true);
-    private Label Mon = new Label("Monday");
-    private Label Tue = new Label("Tuesday");
-    private Label Wed = new Label("Wednesday");
-    private Label Thu = new Label("Thursday");
-    private Label Fri = new Label("Friday");
-    private Label Sat = new Label("Saturday");
-    private Label Sun = new Label("Sunday");
+    private Label[] days = new Label[7];
+    private ThreeHourWeather[][] data = null;
+    private Image windTitle = new Image("file:images/titleWind.png", 0, 25, true, true);
+    private Image tempTitle = new Image("file:images/titleTemp.png", 0, 25, true, true);
+    private Image precTitle = new Image("file:images/titlePrec.png", 0, 25, true, true);
 
     		
-    private TitledPane accord(Label day, Image weather){
+    private TitledPane accord(Label day, int whichday){
 		TitledPane oneTab = new TitledPane();
 		oneTab.getStylesheets().add("file:css/accordion.css");
+		
+		//calculating average weather
+		ThreeHourWeather[] todayData = data[whichday];
+		Double temp = 0.0;
+		Double wind = 0.0;
+		Double prec = 0.0;
+		for(ThreeHourWeather w : todayData){
+			temp += w.temperature();
+			wind += w.windSpeed();
+			prec += w.precipProb();
+		}
+		temp = ((double) Math.round(temp * 10/todayData.length)) / 10;
+		wind = ((double) Math.round(wind * 10/todayData.length)) / 10;
+		prec = ((double) Math.round(prec * 10/todayData.length)) / 10;
+		
+	
 
 		//Make a VBox
 		VBox mainBox = new VBox();
@@ -53,88 +71,84 @@ public class AccordionController {
 	    HBox subBox = new HBox();
 	    subBox.setSpacing(10);
 	    subBox.setAlignment(Pos.CENTER);
-	    subBox.getChildren().add(new ImageView(weather));
-	    subBox.getChildren().add(new Label("33¨¬C"));
-	    subBox.getChildren().add(new ImageView(weather));
-	    subBox.getChildren().add(new Label("100mph"));
-	    subBox.getChildren().add(new ImageView(weather));
-	    subBox.getChildren().add(new Label("NW"));
+	    subBox.getChildren().add(new ImageView(tempTitle));
+	    subBox.getChildren().add(new Label(temp + "¨¬C"));
+	    subBox.getChildren().add(new ImageView(windTitle));
+	    subBox.getChildren().add(new Label(wind + "mph"));
+	    subBox.getChildren().add(new ImageView(precTitle));
+	    subBox.getChildren().add(new Label(prec + "%"));
 	    
 	    //Put the VBox above into oneTab
 	    mainBox.getChildren().add(subBox);
 	    oneTab.setGraphic(mainBox);
 		return oneTab;
     }
-
-
-    @FXML
-    private void initialize(){
-
-    	TitledPane day1 = accord(Mon, sunnyCloud);
-    	day1.setContent(content());
-    	
-    	TitledPane day2 = accord(Tue, sunnyCloud);
-    	day2.setContent(content());
-    	
-    	TitledPane day3 = accord(Wed, sunnyCloud);
-    	day3.setContent(content());
-
-    	TitledPane day4 = accord(Thu, sunnyCloud);
-    	day4.setContent(content());
-
-    	TitledPane day5 = accord(Fri, sunnyCloud);
-    	day5.setContent(content());
-
-    	TitledPane day6 = accord(Sat, sunnyCloud);
-    	day6.setContent(content());
-
-    	TitledPane day7 = accord(Sun, sunnyCloud);
-    	day7.setContent(content());
-
-
-        accordion.getPanes().add(day1);
-        accordion.getPanes().add(day2);
-        accordion.getPanes().add(day3);
-        accordion.getPanes().add(day4);
-        accordion.getPanes().add(day5);
-        accordion.getPanes().add(day6);
-        accordion.getPanes().add(day7);
+    
+    private void getData(String currentLocation){
+    	TextData raw = null;
+    	try {
+			raw = new TextData(Integer.toString(Locations.getInstance().search(currentLocation)));
+		} catch (MalformedURLException e) {
+			System.out.println("weatherData load failed due to wrong URL");
+			e.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("weatherData load failed due to IOException");
+			e.printStackTrace();
+		}
+    	data = raw.data;
     }
-
-
-    private ScrollPane content(){
+    
+    private ScrollPane content(int day){
+    	ThreeHourWeather[] todayData = data[day];
+    	
 		ScrollPane base = new ScrollPane();
+		base.getStyleClass().add("scroll-pane");
 		base.setPannable(true);
 
 		List<VBox> hours = new ArrayList<>();
-		for(int i=0; i<8; i++){
+		for(int i=0; i<todayData.length; i++){
 			VBox hour = new VBox();
-			hour.getStyleClass().add("hour");
+			hour.setSpacing(10);
+			hour.setPrefWidth(120);
+			hour.setMaxWidth(120);
+			if(i%2 == 0){
+				hour.getStyleClass().add("hour");
+			}else{
+				hour.getStyleClass().add("hour2");
+			}
+			
 			List<Node> content = hour.getChildren();
-
+			
+			content.add(new Label(i*3 + ":00"));
+			
 			HBox wind = new HBox();
+			wind.getStyleClass().add("transparent");
 			ImageView windimg = new ImageView();
-			windimg.setImage(new Image("file:images/wind.png"));
+			windimg.setImage(new Image("file:images/wind.png", 0, 50, true, true));
 			windimg.getStyleClass().add("windicon");
 			wind.getChildren().add(windimg);
-			Label wind_val = new Label("7-9");
+			Label wind_val = new Label(Integer.toString(todayData[i].windSpeed()));
 			wind_val.getStyleClass().add("wind_val");
 			wind.getChildren().add(wind_val);
+			
+			VBox windInfo = new VBox();
 ;			Label wind_msmt = new Label("mph");
 			wind_msmt.getStyleClass().add("wind_msmt");
-			wind.getChildren().add(wind_msmt);
-			Label wind_dir = new Label("NE");
+			windInfo.getChildren().add(wind_msmt);
+			Label wind_dir = new Label(todayData[i].direction());
 			wind_dir.getStyleClass().add("wind_dir");
-			wind.getChildren().add(wind_dir);
+			windInfo.getChildren().add(wind_dir);
+			
+			wind.getChildren().add(windInfo);
 			content.add(wind);
 
 
 			HBox temp = new HBox();
 			ImageView tempimg = new ImageView();
-			tempimg.setImage(new Image("file:images/temp.png"));
+			tempimg.setImage(new Image("file:images/temp.png", 0, 50, true, true));
 			tempimg.getStyleClass().add("tempicon");
 			temp.getChildren().add(tempimg);
-			Label temp_val = new Label("11");
+			Label temp_val = new Label(Integer.toString(todayData[i].temperature()));
 			temp_val.getStyleClass().add("temp_val");
 			temp.getChildren().add(temp_val);
 			Label temp_msmt = new Label("¨¬C");
@@ -144,11 +158,12 @@ public class AccordionController {
 
 
 			HBox prec = new HBox();
+			prec.getStyleClass().add("transparent");
 			ImageView precimg = new ImageView();
-			precimg.setImage(new Image("file:images/prec.png"));
+			precimg.setImage(new Image("file:images/prec.png", 0, 50, true, true));
 			precimg.getStyleClass().add("precicon");
 			prec.getChildren().add(precimg);
-			Label prec_val = new Label("0%");
+			Label prec_val = new Label(Integer.toString(todayData[i].precipProb()) + "%"); //precipitation probability for now
 			prec_val.getStyleClass().add("small_val");
 			prec.getChildren().add(prec_val);
 			content.add(prec);
@@ -156,10 +171,10 @@ public class AccordionController {
 
 			HBox hum = new HBox();
 			ImageView humimg = new ImageView();
-			humimg.setImage(new Image("file:images/hum.png"));
+			humimg.setImage(new Image("file:images/hum.png", 0, 50, true, true));
 			humimg.getStyleClass().add("humicon");
 			hum.getChildren().add(humimg);
-			Label hum_val = new Label("0%");
+			Label hum_val = new Label(Integer.toString(todayData[i].humidity()) + "%");
 			hum_val.getStyleClass().add("small_val");
 			hum.getChildren().add(hum_val);
 			content.add(hum);
@@ -167,43 +182,66 @@ public class AccordionController {
 
 			HBox uv = new HBox();
 			ImageView uvimg = new ImageView();
-			uvimg.setImage(new Image("file:images/uv.png"));
+			uvimg.setImage(new Image("file:images/uv.png", 0, 50, true, true));
 			uvimg.getStyleClass().add("uvicon");
 			uv.getChildren().add(uvimg);
-			Label uv_val = new Label("6");
+			Label uv_val = new Label(Integer.toString(todayData[i].UV()));
 			uv_val.getStyleClass().add("small_val");
 			uv.getChildren().add(uv_val);
 			content.add(uv);
 
-
+			/*
 			HBox pres = new HBox();
 			ImageView presimg = new ImageView();
-			presimg.setImage(new Image("file:images/pres.png"));
+			presimg.setImage(new Image("file:images/pres.png", 0, 50, true, true));
 			presimg.getStyleClass().add("presicon");
 			pres.getChildren().add(presimg);
-			Label pres_val = new Label("1022 hPa");
+			Label pres_val = new Label(Integer.toString(*****pressure data not available*****));
 			pres_val.getStyleClass().add("small_val");
 			pres.getChildren().add(pres_val);
 			content.add(pres);
+			*/
 
-
-
-			hour.setMinWidth(320);
 			hours.add(hour);
 		}
 
 		HBox scrollContent = new HBox();
+		scrollContent.getStyleClass().add("transparent");
 		scrollContent.setSpacing(4);
 		scrollContent.getChildren().addAll(hours);
 
 		base.setContent(scrollContent);
-		ScrollBar scroll = new ScrollBar();
 		base.setVbarPolicy(ScrollBarPolicy.NEVER);
 		base.setHbarPolicy(ScrollBarPolicy.NEVER);
 
 		return base;
 	}
 
+    @FXML
+    private void initialize(){
+    	days[0] = new Label("Monday");
+    	days[1] = new Label("Tuesday");
+    	days[2] = new Label("Wednesday");
+    	days[3] = new Label("Thursday");
+    	days[4] = new Label("Friday");
+    	days[5] = new Label("Saturday");
+    	days[6] = new Label("Sunday");
+
+    	//set initial location to Cambridge for now
+    	getData("Cambridge");
+    	
+    	for(int i=0; i<data.length; i++){
+    		TitledPane oneDay = accord(days[i], i);
+    		VBox fill = new VBox();
+    		fill.setSpacing(10);
+    		fill.getChildren().addAll(new Label("Hourly Information:"), content(i));
+    		oneDay.setContent(fill);
+    		accordion.getPanes().add(oneDay);
+    		if(i==0){
+    			accordion.setExpandedPane(oneDay);
+    		}
+    	}
+    }
 
 /**
 	private ScrollPane hourly(){

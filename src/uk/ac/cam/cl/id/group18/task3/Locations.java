@@ -56,22 +56,31 @@ public class Locations {
 
 		locations = parseString(locationString);
 
-		for(int i = 0; i < locations.length; i++){
-		    locationMap.put(locations[i].getID(), locations[i]);
-        }
-
 		map = new HashMap<>();
 		pointer = 0;
+		
+		for(int i = 0; i < locations.length; i++){
+		    locationMap.put(locations[i].getID(), locations[i]);
+		    map.put(locations[i].toString(), locations[i].getID());
+        }
+
+
+		
 	}
 
 	public Location getLocation(int id){
 	    return locationMap.get(id);
     }
-
+	
+	//changed this bit and the iteration in the contructor for now, you can change it later leo
 	public int search(String name){
-		if(map.containsKey(name)){
-			return map.get(name);
+		for(Map.Entry<String, Integer> e : map.entrySet()){
+			if(e.getKey().equals(name)){
+				return e.getValue();
+			}
 		}
+		throw new NullPointerException();
+		/*
 		while(pointer < locations.length){
 			if(locations[pointer].getName() == name){
 				map.put(locations[pointer].getName(), locations[pointer].getID());
@@ -83,6 +92,7 @@ public class Locations {
 			}
 		}
 		throw new NullPointerException();
+		*/
 	}
 
 	private Location[] parseString(String locationString){
