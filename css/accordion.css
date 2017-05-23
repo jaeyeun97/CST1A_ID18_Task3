@@ -74,7 +74,8 @@
 }
 
 .hour{
-	-fx-background-color: transparent;	
+ -fx-background-color: transparent;
+ -fx-font: 15pt "Arial";
 }
 
 .hour .text{
@@ -84,7 +85,8 @@
 }
 
 .hour2{
-	-fx-background-color: rgb(0,0,0,0.2);
+  -fx-background-color: rgba(0,0,0,0.2);
+ -fx-font: 15pt "Arial";
 }
 
 .hour2 .text{
@@ -93,10 +95,16 @@
  -fx-stroke-width: 0.5px;
 }
 
+.hourly_text{
+ -fx-stroke: darkblue;
+ -fs-fill: white;
+ -fx-stroke-width: 0.5px;
+ -fx-font: bold 15pt;
 
+}
 
  .wind_val .text{
-  -fx-font: 30pt "Arial";
+  -fx-font: bold 30pt "Arial";
 }
 
  .wind_msmt{
@@ -111,7 +119,7 @@
 
  .temp_val{
   -fx-text-fill:  rgb(253,181,21);
-  -fx-font: 30pt "Arial";
+  -fx-font: bold 30pt "Arial";
   -fx-text-alignment: right;
  }
 
@@ -122,12 +130,16 @@
 
  .small_name{
   -fx-text-fill: rgb(253,181,21);
-  -fx-font: bold 10pt "Arial";
+  -fx-font: bold 20pt "Arial";
  }
 
 
  .small_val{
   -fx-text-fill: #BACFE4;
-  -fx-font: bold 10pt "Arial";
+  -fx-font: bold 20pt "Arial";
   -fx-text-alignment: center;
+ }
+
+ .small_content .text{
+  -fx-alignment: baseline-center;
  }
