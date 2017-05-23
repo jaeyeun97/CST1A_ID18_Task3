@@ -32,10 +32,7 @@ public class OpenStreetMap {
         return baseURL + String.format("?center=%.7f,%.7f&zoom=%d&size=960x800&maptype=mapnik", lat, lon, zoom);
     }
 
-    public ImageView getImageView(){
-        ImageView im = new ImageView(this.i);
-        im.setFitWidth(960);
-        im.setFitHeight(800);
-        return im;
+    public Image getImage(){
+        return i;
     }
 }

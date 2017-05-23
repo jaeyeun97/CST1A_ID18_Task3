@@ -40,12 +40,12 @@ public class MapController {
     @FXML
     private Slider mapSlider;
     @FXML
-    private ListView searchResult;
-    @FXML
     private ListView<MapSelector> tickBox;
     @FXML
     private StackPane mapImagePane;
-    
+    @FXML
+    private Slider zoomSlider;
+
     private Button returnCurrent;
     
     private void setSearchBar(){
@@ -94,10 +94,16 @@ public class MapController {
         
     @FXML
     private void initialize() throws IOException {
-        searchResult.setVisible(false);
+        Location defaultLocation = Locations.getInstance().getLocation(350731);
+        MapImages.setup((int) mapSlider.getValue(),(int) zoomSlider.getValue(), defaultLocation);
         // Search Bar
         setSearchBar();
-        
+
+        ImageView iv = MapImages.getOpenStreetMapView();
+        AnchorPane p = MapImages.getImagePane(MapType.CLOUDANDRAIN);
+        mapImagePane.getChildren().add(iv);
+        mapImagePane.getChildren().add(p);
+
         // Tick Box
         tickBox.setItems(MapSelector.getObservableList());
         tickBox.setCellFactory(CheckBoxListCell.forListView(MapSelector::getSelectedProperty,
@@ -113,12 +119,7 @@ public class MapController {
             }
         }));
 
-        OpenStreetMap m = MapImages.getOpenStreetMap();
-        ImageView i = m.getImageView();
-        mapImagePane.getChildren().add(i);
-        AnchorPane p = MapImages.getImagePane(MapType.CLOUDANDRAIN);
-        mapImagePane.getChildren().add(p);
-
+        // Map Slider
         mapSlider.valueProperty().addListener(
                 (observable, oldVal, newVal) -> mapSlider.setValue(((int) Math.round(newVal.doubleValue()/3))*3)
         );
@@ -134,6 +135,23 @@ public class MapController {
             }
         });
         mapSlider.valueProperty().addListener((observable, oldVal, newVal) -> {
+            try {
+                MapImages.updateTimestep(newVal.intValue());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         });
+        // Zoom Slider
+        zoomSlider.valueProperty().addListener(
+                (observable, oldVal, newVal) -> zoomSlider.setValue(((int) Math.round(newVal.doubleValue())))
+        );
+        zoomSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            try {
+                MapImages.updateZoom(newValue.intValue());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 }

@@ -11,7 +11,7 @@
         <StackPane fx:id="mapImagePane" maxHeight="800.0" maxWidth="960.0" minHeight="800.0" minWidth="960.0" prefHeight="800.0" prefWidth="960.0" />
         <Slider fx:id="mapSlider" blockIncrement="3.0" layoutX="41.0" layoutY="742.0" majorTickUnit="3.0" max="36.0" prefHeight="15.0" prefWidth="885.0" showTickLabels="true" showTickMarks="true" />
         <HBox fx:id="searchBar" layoutX="253.0" layoutY="46.0" prefHeight="26.0" prefWidth="600.0" />
-        <ListView fx:id="tickBox" layoutX="56.0" layoutY="46.0" prefHeight="125.0" prefWidth="140.0" />
-        <ListView fx:id="searchResult" layoutX="253.0" layoutY="100.0" prefHeight="323.0" prefWidth="450.0" />
+        <ListView fx:id="tickBox" layoutX="60.0" layoutY="50.0" prefHeight="125.0" prefWidth="140.0" />
+        <Slider fx:id="zoomSlider" blockIncrement="1.0" layoutX="60.0" layoutY="200.0" majorTickUnit="1.0" max="12.0" minorTickCount="1" orientation="VERTICAL" showTickMarks="true" value="8.0" />
     </children>
 </Pane>
