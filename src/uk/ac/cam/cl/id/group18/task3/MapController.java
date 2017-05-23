@@ -8,6 +8,8 @@ package uk.ac.cam.cl.id.group18.task3;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxListCell;
@@ -20,6 +22,8 @@ import javafx.util.StringConverter;
 import np.com.ngopal.control.AutoFillTextBox;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by jaeyeun on 17. 5. 16.
@@ -42,6 +46,7 @@ public class MapController {
     
     private void setSearchBar(){
         //DATA 
+    	Map<String, Location> name2Loc = new HashMap<>();
         ObservableList data = FXCollections.observableArrayList();
         Locations loc = null;
         try {
@@ -54,23 +59,33 @@ public class MapController {
 		if(loc == null){
 			System.out.println("location load failed for autoFillSearchBar");
 		}
-        String[] s = loc.locationNames();
         for(int j=0; j<s.length; j++){ 
-            data.add(s[j]); 
+            data.add(loc.locations[j]);
         } 
         
         //Layout 
         searchBar.setSpacing(10); 
         
         //AutoFillBox
-        AutoFillTextBox box = new AutoFillTextBox(data);
+        ComboBox box = new ComboBox(data);
+        //AutoFillTextBox box = new AutoFillTextBox(data);
         box.setPrefWidth(450);
-        box.setFilterMode(true);
+        //box.setFilterMode(true);
         
         //Label 
         Image search = new Image("file:images/search.png", 0, 20, true, true);
+        
         //Button
         returnCurrent = new Button("Search");
+        returnCurrent.setOnAction(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent e) {
+                System.out.println(box.getValue()); //this gives you the corresponding Location object, not just string
+                //System.out.println(box.getText());  -> for autofillbox, might need to use a map to return Location object
+            }
+        });
+
+        
+        //put them into HBox
         searchBar.getChildren().addAll(new ImageView(search), box, returnCurrent); 
     }
         
